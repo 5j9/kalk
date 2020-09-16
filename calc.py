@@ -117,8 +117,6 @@ binary_operators = {
     '//': floordiv,
     '<<': lshift,
     '>>': rshift,
-    'fsum': fsum_all,
-    'sum': sum_all,
     'gcd': gcd,
     'lcm': lcm,
     'P': perm,
@@ -181,6 +179,8 @@ special_operators = {
     's': print_stack,
     'prod': product,
     'dist2': dist2,
+    'fsum': fsum_all,
+    'sum': sum_all,
 }
 
 

@@ -57,3 +57,9 @@ def test_distance():
 def test_chr(mocked_print):
     assert evaluate('65.1 chr') == 65.1
     mocked_print.assert_called_once_with('A')
+
+
+def test_sum_fsum():
+    stack.clear()
+    assert evaluate('1 2 3sum') == 6
+    assert evaluate('6fsum') == 12.0
