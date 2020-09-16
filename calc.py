@@ -50,9 +50,9 @@ def print_stack():
 
 
 def display_help():
-    pprint(binary_operators)
-    pprint(unary_operators)
-    pprint(special_operators)
+    pprint(BINARY_OPERATORS)
+    pprint(UNARY_OPERATORS)
+    pprint(SPECIAL_OPERATORS)
 
 
 def loud_eulers_number():
@@ -99,7 +99,7 @@ def print_max():
     print(max(STACK))
 
 
-binary_operators = {
+BINARY_OPERATORS = {
     '%%': percent,
     '%': mod,
     '&': and_,
@@ -122,9 +122,8 @@ binary_operators = {
     'lcm': lcm,
     'log': log,
     'remainder': remainder,
-    '|': or_,
-}
-unary_operators = {
+    '|': or_}
+UNARY_OPERATORS = {
     '!': factorial,
     'abs': abs,
     'acos': acos,
@@ -158,11 +157,8 @@ unary_operators = {
     'tan': tan,
     'trunc': trunc,
     'ulp': ulp,
-    '~': invert,
-}
-
-
-special_operators = {
+    '~': invert}
+SPECIAL_OPERATORS = {
     'bin': print_bin,
     'c': CLEAR,
     'chr': print_chr,
@@ -189,18 +185,20 @@ fullmatch = rc(  # noqa
     r'(?:('
         r'-?[\d۰-۹][\d۰-۹,.]*+(?:e[\d۰-۹]++)?'
         fr'|\L<operators>'
-    r')\s*+)*+', operators=binary_operators.keys()
-                           | unary_operators.keys()
-                           | special_operators.keys()).fullmatch
+    r')\s*+)*+',
+    operators=(
+        BINARY_OPERATORS.keys()
+        | UNARY_OPERATORS.keys()
+        | SPECIAL_OPERATORS.keys())).fullmatch
 
 
 def apply(token):
-    if (op := binary_operators.get(token)) is not None:
+    if (op := BINARY_OPERATORS.get(token)) is not None:
         last = POP()
         APPEND(op(POP(), last))
-    elif (op := unary_operators.get(token)) is not None:
+    elif (op := UNARY_OPERATORS.get(token)) is not None:
         APPEND(op(POP()))
-    elif (op := special_operators.get(token)) is not None:
+    elif (op := SPECIAL_OPERATORS.get(token)) is not None:
         op()
     else:
         return False
