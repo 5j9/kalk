@@ -63,3 +63,7 @@ def test_sum_fsum():
     CLEAR()
     assert evaluate('1 2 3sum') == 6
     assert evaluate('6fsum') == 12.0
+
+
+def test_thousand_separator():
+    assert evaluate('1,234 5 +') == 1239

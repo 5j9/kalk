@@ -216,7 +216,7 @@ def evaluate(i):
             continue
 
         # treat it as number
-        token.replace(',', '')
+        token = token.replace(',', '')
         try:
             token = int(token)
         except ValueError:
