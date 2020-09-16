@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from calc import evaluate, stack, append, e
+from calc import evaluate, APPEND, e, CLEAR
 
 
 def test_add():
@@ -12,9 +12,9 @@ def test_negative():
 
 
 def test_empty():
-    stack.clear()
+    CLEAR()
     assert evaluate('') is None
-    append(1)
+    APPEND(1)
     assert evaluate('') is 1
 
 
@@ -40,7 +40,7 @@ def test_factorial():
 
 @patch('builtins.print')
 def test_invalid_op(mocked_print):
-    stack.clear()
+    CLEAR()
     assert evaluate('sin') is None
     mocked_print.assert_called_once_with('not enough arguments')
 
@@ -60,6 +60,6 @@ def test_chr(mocked_print):
 
 
 def test_sum_fsum():
-    stack.clear()
+    CLEAR()
     assert evaluate('1 2 3sum') == 6
     assert evaluate('6fsum') == 12.0

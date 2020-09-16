@@ -10,34 +10,34 @@ from pprint import pprint
 from regex import compile as rc
 
 
-stack = []
-append = stack.append
-clear = stack.clear
-pop = stack.pop
+STACK = []
+APPEND = STACK.append
+CLEAR = STACK.clear
+POP = STACK.pop
 
 
 def sum_all():
-    s = sum(stack)
-    clear()
-    append(s)
+    s = sum(STACK)
+    CLEAR()
+    APPEND(s)
 
 
 def fsum_all():
-    s = fsum(stack)
-    clear()
-    append(s)
+    s = fsum(STACK)
+    CLEAR()
+    APPEND(s)
 
 
 def product():
-    p = prod(stack)
-    clear()
-    append(p)
+    p = prod(STACK)
+    CLEAR()
+    APPEND(p)
 
 
 def dist2():
-    d = dist((stack[-4], stack[-3]), (stack[-2], stack[-1]))
-    del stack[-3:]
-    stack[-1] = d
+    d = dist((STACK[-4], STACK[-3]), (STACK[-2], STACK[-1]))
+    del STACK[-3:]
+    STACK[-1] = d
 
 
 def percent(a, b, /):
@@ -45,7 +45,7 @@ def percent(a, b, /):
 
 
 def print_stack():
-    for i, n in enumerate(stack):
+    for i, n in enumerate(STACK):
         print(f'{i}: {n:,}')
 
 
@@ -56,47 +56,47 @@ def display_help():
 
 
 def loud_eulers_number():
-    append(e)
+    APPEND(e)
 
 
 def load_pi():
-    append(pi)
+    APPEND(pi)
 
 
 def load_tau():
-    append(tau)
+    APPEND(tau)
 
 
 def load_nan():
-    append(nan)
+    APPEND(nan)
 
 
 def load_inf():
-    append(inf)
+    APPEND(inf)
 
 
 def print_bin():
-    print(bin(stack[-1]))
+    print(bin(STACK[-1]))
 
 
 def print_min():
-    print(min(stack))
+    print(min(STACK))
 
 
 def print_chr():
-    print(chr(int(stack[-1])))
+    print(chr(int(STACK[-1])))
 
 
 def print_hex():
-    print(hex(stack[-1]))
+    print(hex(STACK[-1]))
 
 
 def print_oct():
-    print(oct(stack[-1]))
+    print(oct(STACK[-1]))
 
 
 def print_max():
-    print(max(stack))
+    print(max(STACK))
 
 
 binary_operators = {
@@ -164,7 +164,7 @@ unary_operators = {
 
 special_operators = {
     'bin': print_bin,
-    'c': clear,
+    'c': CLEAR,
     'chr': print_chr,
     'dist2': dist2,
     'e': loud_eulers_number,
@@ -196,10 +196,10 @@ fullmatch = rc(  # noqa
 
 def apply(token):
     if (op := binary_operators.get(token)) is not None:
-        last = pop()
-        append(op(pop(), last))
+        last = POP()
+        APPEND(op(POP(), last))
     elif (op := unary_operators.get(token)) is not None:
-        append(op(pop()))
+        APPEND(op(POP()))
     elif (op := special_operators.get(token)) is not None:
         op()
     else:
@@ -223,10 +223,10 @@ def evaluate(i):
             token = int(token)
         except ValueError:
             token = float(token)
-        append(token)
+        APPEND(token)
 
     try:
-        return stack[-1]
+        return STACK[-1]
     except IndexError:
         return None
 
