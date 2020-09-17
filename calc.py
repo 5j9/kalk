@@ -4,7 +4,7 @@ from math import sin, cos, tan, atan, atan2, atanh, asin, asinh, acos, acosh,\
     gamma, lgamma, tau, copysign, fabs, fmod, isqrt, ldexp, nextafter,\
     remainder, ulp, log1p, log2, pow as fpow, inf, nan
 from operator import add, sub, mul, truediv, floordiv, mod, lshift,\
-    rshift, and_, xor, invert, or_
+    rshift, and_, xor, invert, or_, neg
 from pprint import pprint
 
 from regex import compile as rc
@@ -107,6 +107,7 @@ BINARY_OPERATORS = {
     '**': pow,
     '+': add,
     '-': sub,
+    'n': neg,
     '/': truediv,
     '//': floordiv,
     '<<': lshift,
@@ -114,14 +115,14 @@ BINARY_OPERATORS = {
     'C': comb,
     'P': perm,
     '^': xor,
-    'copysign': copysign,
+    'cs': copysign,
     'fmod': fmod,
     'fpow': fpow,
     'gcd': gcd,
     'hypot': hypot,
     'lcm': lcm,
     'log': log,
-    'remainder': remainder,
+    'rem': remainder,
     '|': or_}
 UNARY_OPERATORS = {
     '!': factorial,
