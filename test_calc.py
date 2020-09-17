@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from calc import evaluate, APPEND, e, CLEAR
+from calc import evaluate, APPEND, e, CLEAR, STACK
 
 
 def test_add():
@@ -67,3 +67,11 @@ def test_sum_fsum():
 
 def test_thousand_separator():
     assert evaluate('1,234 5 +') == 1239
+
+
+def test_swap():
+    CLEAR()
+    APPEND(1)
+    APPEND(2)
+    evaluate('<>')
+    assert STACK == [2, 1]

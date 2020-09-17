@@ -99,6 +99,10 @@ def print_max():
     print(max(STACK))
 
 
+def swap():
+    STACK[-2:] = reversed(STACK[-2:])
+
+
 BINARY_OPERATORS = {
     '%%': percent,
     '%': mod,
@@ -177,6 +181,7 @@ SPECIAL_OPERATORS = {
     'prod': product,
     's': print_stack,
     'sum': sum_all,
+    '<>': swap,
     'tau': load_tau,
 }
 
@@ -239,3 +244,6 @@ def run():
 
 if __name__ == '__main__':
     run()
+
+
+# todo: support complex numbers
