@@ -1,6 +1,6 @@
 __version__ = '0.1'
 
-from itertools import zip_longest
+
 from math import sin, cos, tan, atan, atan2, atanh, asin, asinh, acos, acosh,\
     factorial, pi, e, ceil, comb, floor, fsum, gcd, lcm, perm, prod, trunc, \
     exp, expm1, log, log10, sqrt, dist, hypot, degrees, radians, erf, erfc,\
@@ -221,6 +221,9 @@ def apply(token):
 
 def evaluate(i):
     m = fullmatch(i)
+    if m is None:
+        print('SyntaxError')
+        return None
     for token in m.captures(1):
         try:
             if apply(token) is not False:

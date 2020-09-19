@@ -91,3 +91,9 @@ def test_complex():
 
 def test_capital_e():
     assert evaluate('2E-2') == .02
+
+
+@patch('builtins.print')
+def test_syntax_error(mocked_print):
+    assert evaluate('a') is None
+    mocked_print.assert_called_once_with('SyntaxError')
