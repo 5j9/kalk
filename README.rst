@@ -53,7 +53,7 @@ Kalk ignores ``,`` (thousands separator) within numbers.
 
 .. code-block:: python
 
-    >>> 1,2,3,4 1 +
+    >>> 1,234 1 +
     1,235
 
 Most of the functions defined in Python's math_ module are supported.
