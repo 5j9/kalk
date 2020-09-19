@@ -192,14 +192,14 @@ SPECIAL_OPERATORS = {
 fullmatch = rc(  # noqa
     r'\s*+'
     r'(?:('
-        r'-?[\d۰-۹][\d۰-۹,.]*+(?:e[\d۰-۹]++)?'
-        fr'|\L<operators>'
+        r'-?+[\d۰-۹,.]++(?:e[\d۰-۹]++)?+'
+        r'|\L<operators>'
     r')\s*+)*+',
     operators=(
         BINARY_OPERATORS.keys()
         | UNARY_OPERATORS.keys()
         | SPECIAL_OPERATORS.keys())).fullmatch
-
+print(fullmatch.__self__.pattern)
 
 def apply(token):
     if (op := BINARY_OPERATORS.get(token)) is not None:

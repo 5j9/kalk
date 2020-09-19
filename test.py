@@ -75,3 +75,7 @@ def test_swap():
     APPEND(2)
     evaluate('<>')
     assert STACK == [2, 1]
+
+
+def test_float_without_leading_zero():
+    assert evaluate('.9') == .9
