@@ -77,7 +77,7 @@ Handy operators:
 * ``pi`` adds the pi constant to the stack
 * ``e`` adds `Euler's number` to the stack
 * ``<>`` swaps the place of the last two values in the stack.
-* ``h`` prints a list of all operators. (still needs lots refinements.)
+* ``h`` prints a list of all operators. (still needs lots of refinements.)
 
 
 
