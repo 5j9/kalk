@@ -1,9 +1,12 @@
 from setuptools import setup
-
+from os.path import dirname
 
 setup(
     name='kalk',
     version='0.2.1.dev0',
+    long_description=open(
+        f'{dirname(__file__)}/README.rst', encoding='utf-8').read(),
+    long_description_content_type='text/x-rst',
     description='a simple cli RPN calculator written in Python',
     url='https://github.com/5j9/kalk',
     author='5j9',
