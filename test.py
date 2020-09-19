@@ -104,3 +104,7 @@ def test_preserve_stack_on_binary_fail():
     APPEND(1)
     evaluate('*')
     assert STACK == [1]
+
+
+def test_ignore_underscore_in_numbers():
+    assert evaluate('1_2.3_4e0_6J') == 12340000j

@@ -190,9 +190,9 @@ SPECIAL_OPERATORS = {
 
 N = ( # noqa
     r'(?>'
-        r'[\d۰-۹][\d۰-۹,]*+(?:\.[\d۰-۹]*+)?+'
-        r'|\.[\d۰-۹]++'
-    r')(?:[Ee][+-]?+[\d۰-۹]++)?+')
+        r'[\d۰-۹][\d۰-۹,_]*+(?:\.[\d۰-۹_]*+)?+'
+        r'|\.[\d۰-۹_]++'
+    r')(?:[Ee][+-]?+[\d۰-۹_]++)?+')
 fullmatch = rc(  # noqa
     r'\s*+'
     r'(?:'
@@ -236,7 +236,7 @@ def evaluate(i):
             print('Error: not enough arguments')
             continue
 
-        token = token.replace(',', '')
+        token = token.replace(',', '').replace('_', '')
         try:
             try:
                 result = int(token)

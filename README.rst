@@ -11,16 +11,9 @@ Usage
 -----
 After installation run ``kalk`` from your terminal.
 
-Kalk follows Python syntax for numbers. It even support complex numbers:
-
-..
-
-    >>> 1-.1e2J
-    (1-10j)
-
 In RPN_ syntax one would first enter the operands and then the operator:
 
-..
+.. code-block:: python
 
     >>> 1
     1
@@ -30,31 +23,54 @@ In RPN_ syntax one would first enter the operands and then the operator:
     3
 
 
-You may also enter the operands and the operator in one line, just use space to separate them:
+You may also enter the operands and the operator in one line, just use space to
+separate them:
+
+.. code-block:: python
 
     >>> 41 1 +
     42
 
 (tip: the space is not needed when the syntax is not ambiguous.)
 
-As mentioned before, Kalk follows Python's syntax, so ``**`` is the `power operator`_ and ``^`` is `bitwise and`_.
+Kalk follows Python syntax for numbers. It even support complex numbers.
+
+.. code-block:: python
+
+    >>> 1-.1e2J
+    (1-10j)
+
+Therefore ``**`` is the `power operator`_ and ``^`` is `bitwise and`_:
+
+.. code-block:: python
 
     >>> 3 3 **
     27
     >>> 3 3 ^
     0
 
-Most of the functions defined in Python's math_ modules are supported.
+Kalk ignores ``,`` (thousands separator) within numbers.
+
+.. code-block:: python
+
+    >>> 1,2,3,4 1 +
+    1,235
+
+Most of the functions defined in Python's math_ module are supported.
+
+.. code-block:: python
 
     >>> 6 lgamma
     4.787491742782047
 
 and many more:
 
+.. code-block:: python
+
     >>> 1 2 3 4 5 sum
     15
 
-A few handy functions:
+Handy operators:
 
 * ``c`` clears the stack
 * ``s`` prints the stack
