@@ -226,7 +226,7 @@ def evaluate(i):
             if apply(token) is not False:
                 continue
         except IndexError:
-            print('not enough arguments')
+            print('Error: not enough arguments')
             continue
 
         token = token.replace(',', '')

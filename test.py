@@ -42,7 +42,7 @@ def test_factorial():
 def test_invalid_op(mocked_print):
     CLEAR()
     assert evaluate('sin') is None
-    mocked_print.assert_called_once_with('not enough arguments')
+    mocked_print.assert_called_once_with('Error: not enough arguments')
 
 
 def test_eulers_number():
