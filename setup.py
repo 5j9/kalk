@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='kalk',
-    version='0.1',
+    version='0.2',
     description='a simple cli RPN calculator written in Python',
     url='https://github.com/5j9/kalk',
     author='5j9',
