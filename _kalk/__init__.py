@@ -1,6 +1,6 @@
 __version__ = '0.1'
 
-
+from itertools import zip_longest
 from math import sin, cos, tan, atan, atan2, atanh, asin, asinh, acos, acosh,\
     factorial, pi, e, ceil, comb, floor, fsum, gcd, lcm, perm, prod, trunc, \
     exp, expm1, log, log10, sqrt, dist, hypot, degrees, radians, erf, erfc,\
@@ -188,18 +188,24 @@ SPECIAL_OPERATORS = {
     'tau': load_tau,
 }
 
-
+N = ( # noqa
+    r'(?>'
+        r'[\d۰-۹][\d۰-۹,]*+(?:\.[\d۰-۹]*+)?+'
+        r'|\.[\d۰-۹]++'
+    r')(?:[Ee][+-]?+[\d۰-۹]++)?+')
 fullmatch = rc(  # noqa
     r'\s*+'
-    r'(?:('
-        r'-?+[\d۰-۹,.]++(?:e[\d۰-۹]++)?+'
-        r'|\L<operators>'
-    r')\s*+)*+',
+    r'(?:'
+        r'('  # each token is either a number or an operator
+            rf'[+-]?+{N}(?:[Jj]|[-+]{N}[Jj])?+'  # complex part
+            r'|\L<operators>'
+        r')\s*+'
+    r')*+',
     operators=(
         BINARY_OPERATORS.keys()
         | UNARY_OPERATORS.keys()
         | SPECIAL_OPERATORS.keys())).fullmatch
-print(fullmatch.__self__.pattern)
+
 
 def apply(token):
     if (op := BINARY_OPERATORS.get(token)) is not None:
@@ -214,9 +220,8 @@ def apply(token):
 
 
 def evaluate(i):
-    tokens = fullmatch(i).captures(1)
-    # print(tokens)
-    for token in tokens:
+    m = fullmatch(i)
+    for token in m.captures(1):
         try:
             if apply(token) is not False:
                 continue
@@ -224,13 +229,16 @@ def evaluate(i):
             print('not enough arguments')
             continue
 
-        # treat it as number
         token = token.replace(',', '')
         try:
-            token = int(token)
+            try:
+                result = int(token)
+            except ValueError:
+                result = float(token)
         except ValueError:
-            token = float(token)
-        APPEND(token)
+            result = complex(token)
+
+        APPEND(result)
 
     try:
         return STACK[-1]
@@ -247,6 +255,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-# todo: support complex numbers

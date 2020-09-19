@@ -79,3 +79,15 @@ def test_swap():
 
 def test_float_without_leading_zero():
     assert evaluate('.9') == .9
+
+
+def test_leading_positive_sign():
+    assert evaluate('+1 -1 +') == 0
+
+
+def test_complex():
+    assert evaluate('1+2j 0j -') == 1+2j
+
+
+def test_capital_e():
+    assert evaluate('2E-2') == .02
