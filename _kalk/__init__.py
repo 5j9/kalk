@@ -210,7 +210,11 @@ fullmatch = rc(  # noqa
 def apply(token):
     if (op := BINARY_OPERATORS.get(token)) is not None:
         last = POP()
-        APPEND(op(POP(), last))
+        try:
+            APPEND(op(POP(), last))
+        except IndexError:
+            APPEND(last)
+            raise
     elif (op := UNARY_OPERATORS.get(token)) is not None:
         APPEND(op(POP()))
     elif (op := SPECIAL_OPERATORS.get(token)) is not None:

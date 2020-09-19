@@ -97,3 +97,10 @@ def test_capital_e():
 def test_syntax_error(mocked_print):
     assert evaluate('a') is None
     mocked_print.assert_called_once_with('SyntaxError')
+
+
+def test_preserve_stack_on_binary_fail():
+    CLEAR()
+    APPEND(1)
+    evaluate('*')
+    assert STACK == [1]
