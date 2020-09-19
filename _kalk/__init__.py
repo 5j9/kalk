@@ -1,3 +1,6 @@
+__version__ = '0.1'
+
+
 from math import sin, cos, tan, atan, atan2, atanh, asin, asinh, acos, acosh,\
     factorial, pi, e, ceil, comb, floor, fsum, gcd, lcm, perm, prod, trunc, \
     exp, expm1, log, log10, sqrt, dist, hypot, degrees, radians, erf, erfc,\
@@ -235,7 +238,7 @@ def evaluate(i):
         return None
 
 
-def run():
+def main():
     while True:
         last_result = evaluate(input('>>> '))
         if last_result is not None:
@@ -243,7 +246,7 @@ def run():
 
 
 if __name__ == '__main__':
-    run()
+    main()
 
 
 # todo: support complex numbers

@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from calc import evaluate, APPEND, e, CLEAR, STACK
+from _kalk import evaluate, APPEND, e, CLEAR, STACK
 
 
 def test_add():
@@ -15,7 +15,7 @@ def test_empty():
     CLEAR()
     assert evaluate('') is None
     APPEND(1)
-    assert evaluate('') is 1
+    assert evaluate('') == 1
 
 
 def test_percent():
