@@ -80,7 +80,7 @@ Handy operators:
 * ``h`` prints a list of all operators. (still needs lots of refinements.)
 * ``cp`` copies the last result to clipboard.
 * ``pst`` pastes the contents of clipboard and evaluates it.
-
+* ``del`` deletes the last ``n + 1`` values from from the stack with ``n`` being the last value in the stack.
 
 .. _RPN: https://en.wikipedia.org/wiki/Reverse_Polish_notation
 .. _power operator: https://docs.python.org/3/reference/expressions.html#the-power-operator

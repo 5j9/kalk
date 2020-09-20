@@ -4,7 +4,7 @@ from _kalk import evaluate, APPEND, e, CLEAR, STACK
 
 
 def test_add():
-    assert evaluate('1 2 +') == 3
+    assert evaluate('1 +2 +') == 3
 
 
 def test_negative():
@@ -99,11 +99,13 @@ def test_syntax_error(mocked_print):
     mocked_print.assert_called_once_with('SyntaxError')
 
 
-def test_preserve_stack_on_binary_fail():
+@patch('builtins.print')
+def test_preserve_stack_on_binary_fail(mocked_print):
     CLEAR()
     APPEND(1)
     evaluate('*')
     assert STACK == [1]
+    mocked_print.assert_called_once_with('Error: not enough arguments')
 
 
 def test_ignore_underscore_in_numbers():
@@ -116,3 +118,11 @@ def test_copy_paste(copy_mock):
     assert evaluate('pst') == 0j
     evaluate('cp')
     copy_mock.assert_called_once_with('0j')
+
+
+def test_pop():
+    CLEAR()
+    APPEND(7)
+    APPEND(8)
+    assert evaluate('1 del') == 7
+    assert STACK == [7]

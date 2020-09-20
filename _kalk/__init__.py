@@ -115,6 +115,10 @@ def copy_to_clipboard():
     copy(f'{STACK[-1]}')
 
 
+def delete():
+    del STACK[-STACK[-1] - 1:]
+
+
 BINARY_OPERATORS = {
     '%%': percent,
     '%': mod,
@@ -191,6 +195,7 @@ SPECIAL_OPERATORS = {
     'nan': load_nan,
     'oct': print_oct,
     'pi': load_pi,
+    'del': delete,
     'prod': product,
     'pst': paste_from_clipboard,
     's': print_stack,
