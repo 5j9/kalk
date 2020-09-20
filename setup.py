@@ -14,7 +14,7 @@ setup(
     license='GNU General Public License v3 (GPLv3)',
     packages=['_kalk'],
     python_requires='>=3.9',
-    install_requires=['regex'],
+    install_requires=['regex', 'pyperclip'],
     tests_require=['pytest'],
     entry_points={'console_scripts': ['kalk = _kalk:main']},
     zip_safe=True,

@@ -108,3 +108,11 @@ def test_preserve_stack_on_binary_fail():
 
 def test_ignore_underscore_in_numbers():
     assert evaluate('1_2.3_4e0_6J') == 12340000j
+
+
+@patch('_kalk.paste', lambda: '+0j')
+@patch('_kalk.copy')
+def test_copy_paste(copy_mock):
+    assert evaluate('pst') == 0j
+    evaluate('cp')
+    copy_mock.assert_called_once_with('0j')

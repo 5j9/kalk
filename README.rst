@@ -78,7 +78,8 @@ Handy operators:
 * ``e`` adds `Euler's number` to the stack
 * ``<>`` swaps the place of the last two values in the stack.
 * ``h`` prints a list of all operators. (still needs lots of refinements.)
-
+* ``cp`` copies the last result to clipboard.
+* ``pst`` pastes the contents of clipboard and evaluates it.
 
 
 .. _RPN: https://en.wikipedia.org/wiki/Reverse_Polish_notation

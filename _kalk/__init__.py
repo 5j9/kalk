@@ -11,6 +11,7 @@ from operator import add, sub, mul, truediv, floordiv, mod, lshift,\
 from pprint import pprint
 
 from regex import compile as rc
+from pyperclip import copy, paste
 
 
 STACK = []
@@ -106,6 +107,14 @@ def swap():
     STACK[-2:] = reversed(STACK[-2:])
 
 
+def paste_from_clipboard():
+    evaluate(paste())
+
+
+def copy_to_clipboard():
+    copy(f'{STACK[-1]}')
+
+
 BINARY_OPERATORS = {
     '%%': percent,
     '%': mod,
@@ -170,6 +179,7 @@ SPECIAL_OPERATORS = {
     'bin': print_bin,
     'c': CLEAR,
     'chr': print_chr,
+    'cp': copy_to_clipboard,
     'dist2': dist2,
     'e': loud_eulers_number,
     'fsum': fsum_all,
@@ -182,6 +192,7 @@ SPECIAL_OPERATORS = {
     'oct': print_oct,
     'pi': load_pi,
     'prod': product,
+    'pst': paste_from_clipboard,
     's': print_stack,
     'sum': sum_all,
     '<>': swap,
