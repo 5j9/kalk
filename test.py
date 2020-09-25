@@ -131,3 +131,7 @@ def test_pop():
 def test_repeat():
     APPEND(7)
     assert evaluate('rep +') == 14
+
+
+def test_sto_rcl():
+    assert evaluate('1 7 sto 2 3 + 7 rcl +') == 6

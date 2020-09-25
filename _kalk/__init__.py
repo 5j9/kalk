@@ -20,6 +20,9 @@ CLEAR = STACK.clear
 POP = STACK.pop
 
 
+STORAGE = {}
+
+
 def sum_all():
     s = sum(STACK)
     CLEAR()
@@ -123,6 +126,15 @@ def delete():
     del STACK[-STACK[-1] - 1:]
 
 
+def store():
+    k = POP()
+    STORAGE[k] = POP()
+
+
+def recall():
+    APPEND(STORAGE[POP()])
+
+
 BINARY_OPERATORS = {
     '%%': percent,
     '%': mod,
@@ -203,8 +215,10 @@ SPECIAL_OPERATORS = {
     'pi': load_pi,
     'prod': product,
     'pst': paste_from_clipboard,
+    'rcl': recall,
     'rep': repeat,
     's': print_stack,
+    'sto': store,
     'sum': sum_all,
     'tau': load_tau,
 }

@@ -82,6 +82,8 @@ Handy operators:
 * ``pst`` pastes the contents of clipboard and evaluates it.
 * ``rep`` repeats the last result
 * ``s`` prints the stack
+* ``sto`` stores the value before the last in a storage named as the last stack value.
+* ``rcl`` recalls the value in storage using the last stack value as the name.
 
 .. _RPN: https://en.wikipedia.org/wiki/Reverse_Polish_notation
 .. _power operator: https://docs.python.org/3/reference/expressions.html#the-power-operator
