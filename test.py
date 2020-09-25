@@ -133,5 +133,9 @@ def test_repeat():
     assert evaluate('rep +') == 14
 
 
-def test_sto_rcl():
-    assert evaluate('1 7 sto 2 3 + 7 rcl +') == 6
+@patch('builtins.print')
+def test_sto_rcl(mocked_print):
+    CLEAR()
+    assert evaluate('1 2 sto 3 4 + 2 rcl +') == 8
+    assert evaluate('1 rcl +') is None
+    mocked_print.assert_called_once_with('KeyError')
