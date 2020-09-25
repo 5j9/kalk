@@ -130,4 +130,4 @@ def test_pop():
 
 def test_repeat():
     APPEND(7)
-    assert evaluate('r +') == 14
+    assert evaluate('rep +') == 14

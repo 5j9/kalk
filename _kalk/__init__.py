@@ -203,7 +203,7 @@ SPECIAL_OPERATORS = {
     'pi': load_pi,
     'prod': product,
     'pst': paste_from_clipboard,
-    'r': repeat,
+    'rep': repeat,
     's': print_stack,
     'sum': sum_all,
     'tau': load_tau,

@@ -80,7 +80,7 @@ Handy operators:
 * ``h`` prints a list of all operators. (still needs lots of refinements.)
 * ``pi`` adds the pi constant to the stack
 * ``pst`` pastes the contents of clipboard and evaluates it.
-* ``r`` repeats the last result
+* ``rep`` repeats the last result
 * ``s`` prints the stack
 
 .. _RPN: https://en.wikipedia.org/wiki/Reverse_Polish_notation
