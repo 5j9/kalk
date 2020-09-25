@@ -126,3 +126,8 @@ def test_pop():
     APPEND(8)
     assert evaluate('1 del') == 7
     assert STACK == [7]
+
+
+def test_repeat():
+    APPEND(7)
+    assert evaluate('r +') == 14

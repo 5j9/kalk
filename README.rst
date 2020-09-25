@@ -72,15 +72,16 @@ and many more:
 
 Handy operators:
 
-* ``c`` clears the stack
-* ``s`` prints the stack
-* ``pi`` adds the pi constant to the stack
-* ``e`` adds `Euler's number` to the stack
 * ``<>`` swaps the place of the last two values in the stack.
-* ``h`` prints a list of all operators. (still needs lots of refinements.)
+* ``c`` clears the stack
 * ``cp`` copies the last result to clipboard.
-* ``pst`` pastes the contents of clipboard and evaluates it.
 * ``del`` deletes the last ``n + 1`` values from from the stack with ``n`` being the last value in the stack.
+* ``e`` adds `Euler's number` to the stack
+* ``h`` prints a list of all operators. (still needs lots of refinements.)
+* ``pi`` adds the pi constant to the stack
+* ``pst`` pastes the contents of clipboard and evaluates it.
+* ``r`` repeats the last result
+* ``s`` prints the stack
 
 .. _RPN: https://en.wikipedia.org/wiki/Reverse_Polish_notation
 .. _power operator: https://docs.python.org/3/reference/expressions.html#the-power-operator

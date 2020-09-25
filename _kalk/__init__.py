@@ -103,6 +103,10 @@ def print_max():
     print(max(STACK))
 
 
+def repeat():
+    APPEND(STACK[-1])
+
+
 def swap():
     STACK[-2:] = reversed(STACK[-2:])
 
@@ -180,10 +184,12 @@ UNARY_OPERATORS = {
     'ulp': ulp,
     '~': invert}
 SPECIAL_OPERATORS = {
+    '<>': swap,
     'bin': print_bin,
     'c': CLEAR,
     'chr': print_chr,
     'cp': copy_to_clipboard,
+    'del': delete,
     'dist2': dist2,
     'e': loud_eulers_number,
     'fsum': fsum_all,
@@ -195,12 +201,11 @@ SPECIAL_OPERATORS = {
     'nan': load_nan,
     'oct': print_oct,
     'pi': load_pi,
-    'del': delete,
     'prod': product,
     'pst': paste_from_clipboard,
+    'r': repeat,
     's': print_stack,
     'sum': sum_all,
-    '<>': swap,
     'tau': load_tau,
 }
 
