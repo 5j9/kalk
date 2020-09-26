@@ -270,8 +270,8 @@ def evaluate(i):
         except IndexError:
             print('Error: not enough arguments')
             continue
-        except KeyError:
-            print('KeyError')
+        except Exception as e:
+            print(type(e).__name__)
             return
 
         token = token.replace(',', '').replace('_', '')

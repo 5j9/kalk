@@ -139,3 +139,9 @@ def test_sto_rcl(mocked_print):
     assert evaluate('1 2 sto 3 4 + 2 rcl +') == 8
     assert evaluate('1 rcl +') is None
     mocked_print.assert_called_once_with('KeyError')
+
+
+@patch('builtins.print')
+def test_zero_division(mocked_print):
+    assert evaluate('1 0 /') is None
+    mocked_print.assert_called_once_with('ZeroDivisionError')
