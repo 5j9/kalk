@@ -137,7 +137,9 @@ def recall():
 
 BINARY_OPERATORS = {
     '%%': percent,
+    '٪٪': percent,
     '%': mod,
+    '٪': mod,
     '&': and_,
     '*': mul,
     '**': pow,
