@@ -145,3 +145,26 @@ def test_sto_rcl(mocked_print):
 def test_zero_division(mocked_print):
     assert evaluate('1 0 /') is None
     mocked_print.assert_called_once_with('ZeroDivisionError')
+
+
+def test_notations():
+    import _kalk
+    v = evaluate('1 3 /')
+    assert _kalk.FORMAT(v) == '0.3333333333333333'
+    v = evaluate('eng')
+    assert _kalk.FORMAT(v) == '333.33e-3'  # default precision is 5
+    v = evaluate('sci')
+    assert _kalk.FORMAT(v) == '3.33333e-01'
+    v = evaluate('gen')
+    assert _kalk.FORMAT(v) == '0.33333'
+    v = evaluate('nrm')
+    assert _kalk.FORMAT(v) == '0.3333333333333333'
+    v = evaluate('2 prec')
+    assert _kalk.FORMAT(v) == '0.3333333333333333'
+    v = evaluate('eng')
+    assert _kalk.FORMAT(v) == '333e-3'
+    assert _kalk.FORMAT(0) == '0'
+    v = evaluate('sci')
+    assert _kalk.FORMAT(v) == '3.33e-01'
+    v = evaluate('gen')
+    assert _kalk.FORMAT(v) == '0.33'

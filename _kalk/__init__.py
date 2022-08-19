@@ -135,6 +135,99 @@ def recall():
     APPEND(STORAGE[POP()])
 
 
+PRECISION = 5
+
+
+def precision(p):
+    global PRECISION
+    PRECISION = p
+    try:
+        return STACK[-1]
+    except IndexError:
+        return None
+
+
+FORMAT = '{:,}'.format
+
+
+def set_normal_format():
+    global FORMAT
+    FORMAT = '{:,}'.format
+
+
+SI = 0
+
+
+def toggle_si_format():
+    global SI
+    SI = not SI
+
+
+def set_eng_format():
+    global FORMAT
+
+    def eng_string(x):  # see https://stackoverflow.com/a/19270863/2705757
+        """
+        Returns float/int value <x> formatted in a simplified engineering format -
+        using an exponent that is a multiple of 3.
+
+        format: printf-style string used to format the value before the exponent.
+
+        si: if true, use SI suffix for exponent, e.g. k instead of e3, n instead of
+        e-9 etc.
+
+        E.g. with format='%.2f':
+            1.23e-08 => 12.30e-9
+                 123 => 123.00
+              1230.0 => 1.23e3
+          -1230000.0 => -1.23e6
+
+        and with si=True:
+              1230.0 => 1.23k
+          -1230000.0 => -1.23M
+        """
+        if x < 0:
+            x = -x
+            sign = '-'
+        elif x > 0:
+            sign = ''
+        else:
+            return '0'
+
+        exp = int(floor(log10(x)))
+        exp3 = exp - (exp % 3)
+        x3 = x / (10 ** exp3)
+
+        if SI is True and -24 <= exp3 <= 24 and exp3 != 0:
+            exp3_text = 'yzafpnum kMGTPEZY'[(exp3 + 24) // 3]
+        elif exp3 == 0:
+            exp3_text = ''
+        else:
+            exp3_text = f'e{exp3}'
+
+        return f'{sign}{x3:.{max(PRECISION, 3)}g}{exp3_text}'
+
+    FORMAT = eng_string
+
+
+def set_sci_format():
+    global FORMAT
+
+    def sci_string(n):
+        return f'{n:.{PRECISION}e}'
+
+    FORMAT = sci_string
+
+
+def set_general_format():
+    global FORMAT
+
+    def sci_string(n):
+        return f'{n:.{PRECISION}g}'
+
+    FORMAT = sci_string
+
+
 BINARY_OPERATORS = {
     '%%': percent,
     '٪٪': percent,
@@ -161,7 +254,9 @@ BINARY_OPERATORS = {
     'lcm': lcm,
     'log': log,
     'rem': remainder,
-    '|': or_}
+    '|': or_,
+}
+
 UNARY_OPERATORS = {
     '!': factorial,
     'abs': abs,
@@ -189,6 +284,7 @@ UNARY_OPERATORS = {
     'log1p': log1p,
     'log2': log2,
     'nextafter': nextafter,
+    'prec': precision,
     'rad': radians,
     'round': round,
     'sin': sin,
@@ -196,7 +292,9 @@ UNARY_OPERATORS = {
     'tan': tan,
     'trunc': trunc,
     'ulp': ulp,
-    '~': invert}
+    '~': invert,
+}
+
 SPECIAL_OPERATORS = {
     '<>': swap,
     'bin': print_bin,
@@ -206,13 +304,16 @@ SPECIAL_OPERATORS = {
     'del': delete,
     'dist2': dist2,
     'e': loud_eulers_number,
+    'eng': set_eng_format,
     'fsum': fsum_all,
+    'gen': set_general_format,
     'h': display_help,
     'hex': print_hex,
     'inf': load_inf,
     'max': print_max,
     'min': print_min,
     'nan': load_nan,
+    'nrm': set_normal_format,
     'oct': print_oct,
     'pi': load_pi,
     'prod': product,
@@ -220,6 +321,8 @@ SPECIAL_OPERATORS = {
     'rcl': recall,
     'rep': repeat,
     's': print_stack,
+    'sci': set_sci_format,
+    'SI': toggle_si_format,
     'sto': store,
     'sum': sum_all,
     'tau': load_tau,
@@ -297,7 +400,7 @@ def main():
     while True:
         last_result = evaluate(input('>>> '))
         if last_result is not None:
-            print(f'{last_result:,}')
+            print(FORMAT(last_result))
 
 
 if __name__ == '__main__':
