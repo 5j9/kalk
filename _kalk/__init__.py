@@ -166,7 +166,8 @@ def toggle_si_format():
 def set_eng_format():
     global FORMAT
 
-    def eng_string(x):  # see https://stackoverflow.com/a/19270863/2705757
+    # from https://stackoverflow.com/a/19270863/2705757 with some modifications
+    def eng_string(x):
         """
         Returns float/int value <x> formatted in a simplified engineering format -
         using an exponent that is a multiple of 3.
