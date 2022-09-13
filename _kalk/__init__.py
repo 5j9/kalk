@@ -106,7 +106,7 @@ def print_max():
     print(max(STACK))
 
 
-def repeat():
+def ans():
     APPEND(STACK[-1])
 
 
@@ -320,7 +320,7 @@ SPECIAL_OPERATORS = {
     'prod': product,
     'pst': paste_from_clipboard,
     'rcl': recall,
-    'rep': repeat,
+    'a': ans,
     's': print_stack,
     'sci': set_sci_format,
     'SI': toggle_si_format,

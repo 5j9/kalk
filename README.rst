@@ -80,7 +80,7 @@ Handy operators:
 * ``h`` prints a list of all operators. (still needs lots of refinements.)
 * ``pi`` adds the pi constant to the stack
 * ``pst`` pastes the contents of clipboard and evaluates it.
-* ``rep`` repeats the last result
+* ``a`` the last answer
 * ``s`` prints the stack
 * ``sto`` stores the value before the last in storage using the last stack value as the key.
 * ``rcl`` recalls the value in storage using the last stack value as the key.

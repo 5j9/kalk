@@ -95,7 +95,7 @@ def test_capital_e():
 
 @patch('builtins.print')
 def test_syntax_error(mocked_print):
-    assert evaluate('a') is None
+    assert evaluate('invalid') is None
     mocked_print.assert_called_once_with('SyntaxError')
 
 
@@ -128,9 +128,9 @@ def test_pop():
     assert STACK == [7]
 
 
-def test_repeat():
+def test_answer():
     APPEND(7)
-    assert evaluate('rep +') == 14
+    assert evaluate('a +') == 14
 
 
 @patch('builtins.print')
