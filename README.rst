@@ -40,7 +40,7 @@ Kalk follows Python syntax for numbers. It even support complex numbers.
     >>> 1-.1e2J
     (1-10j)
 
-Therefore ``**`` is the `power operator`_ and ``^`` is `bitwise XOR`_:
+Similar to Python, ``**`` is the `power operator`_ and ``^`` is `bitwise XOR`_:
 
 .. code-block:: python
 
