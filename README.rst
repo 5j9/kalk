@@ -33,14 +33,7 @@ separate them:
 
 (tip: the space is not needed when the syntax is not ambiguous.)
 
-Kalk follows Python syntax for numbers. It even support complex numbers.
-
-.. code-block:: python
-
-    >>> 1-.1e2J
-    (1-10j)
-
-Similar to Python, ``**`` is the `power operator`_ and ``^`` is `bitwise XOR`_:
+Kalk tries to follow Python's syntax. Similar to Python, ``**`` is the `power operator`_ and ``^`` is `bitwise XOR`_:
 
 .. code-block:: python
 
