@@ -1,4 +1,4 @@
-from unittest.mock import patch
+from unittest.mock import call, patch
 
 from _kalk import evaluate, APPEND, e, CLEAR, STACK
 
@@ -168,3 +168,13 @@ def test_notations():
     assert _kalk.FORMAT(v) == '3.33e-01'
     v = evaluate('gen')
     assert _kalk.FORMAT(v) == '0.33'
+
+
+@patch('builtins.print')
+def test_air(mocked_print):
+    APPEND(.25)
+    assert evaluate('air') == .25
+    mocked_print.assert_called_once_with((1, 4))
+    APPEND(2)
+    assert evaluate('air') == 2
+    assert mocked_print.call_args == call((2, 1))

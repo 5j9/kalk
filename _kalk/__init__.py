@@ -229,6 +229,12 @@ def set_general_format():
     FORMAT = sci_string
 
 
+def as_integer_ratio(f: float):
+    print(f.as_integer_ratio())
+    return f
+
+
+
 BINARY_OPERATORS = {
     '%%': percent,
     '٪٪': percent,
@@ -263,6 +269,7 @@ UNARY_OPERATORS = {
     'abs': abs,
     'acos': acos,
     'acosh': acosh,
+    'air': as_integer_ratio,
     'asin': asin,
     'asinh': asinh,
     'atan': atan,
