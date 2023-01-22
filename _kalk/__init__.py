@@ -1,4 +1,4 @@
-__version__ = '0.10.1.dev0'
+__version__ = '0.11.0'
 
 
 from math import sin, cos, tan, atan, atan2, atanh, asin, asinh, acos, acosh,\
