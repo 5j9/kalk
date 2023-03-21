@@ -1,6 +1,6 @@
 from unittest.mock import call, patch
 
-from _kalk import evaluate, APPEND, e, CLEAR, STACK
+from _kalk import APPEND, CLEAR, STACK, e, evaluate
 
 
 def test_add():

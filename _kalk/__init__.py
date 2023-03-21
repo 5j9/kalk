@@ -1,18 +1,76 @@
 __version__ = '0.11.1.dev0'
 
 
-from math import sin, cos, tan, atan, atan2, atanh, asin, asinh, acos, acosh,\
-    factorial, pi, e, ceil, comb, floor, fsum, gcd, lcm, perm, prod, trunc, \
-    exp, expm1, log, log10, sqrt, dist, hypot, degrees, radians, erf, erfc,\
-    gamma, lgamma, tau, copysign, fabs, fmod, isqrt, ldexp, nextafter,\
-    remainder, ulp, log1p, log2, pow as fpow, inf, nan
-from operator import add, sub, mul, truediv, floordiv, mod, lshift,\
-    rshift, and_, xor, invert, or_, neg
+from math import (
+    acos,
+    acosh,
+    asin,
+    asinh,
+    atan,
+    atan2,
+    atanh,
+    ceil,
+    comb,
+    copysign,
+    cos,
+    degrees,
+    dist,
+    e,
+    erf,
+    erfc,
+    exp,
+    expm1,
+    fabs,
+    factorial,
+    floor,
+    fmod,
+    fsum,
+    gamma,
+    gcd,
+    hypot,
+    inf,
+    isqrt,
+    lcm,
+    ldexp,
+    lgamma,
+    log,
+    log1p,
+    log2,
+    log10,
+    nan,
+    nextafter,
+    perm,
+    pi,
+    pow as fpow,
+    prod,
+    radians,
+    remainder,
+    sin,
+    sqrt,
+    tan,
+    tau,
+    trunc,
+    ulp,
+)
+from operator import (
+    add,
+    and_,
+    floordiv,
+    invert,
+    lshift,
+    mod,
+    mul,
+    neg,
+    or_,
+    rshift,
+    sub,
+    truediv,
+    xor,
+)
 from pprint import pprint
 
-from regex import compile as rc
 from pyperclip import copy, paste
-
+from regex import compile as rc
 
 STACK = []
 APPEND = STACK.append
