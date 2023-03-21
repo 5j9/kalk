@@ -287,10 +287,8 @@ def set_general_format():
     FORMAT = sci_string
 
 
-def as_integer_ratio(f: float):
-    print(f.as_integer_ratio())
-    return f
-
+def call_method(identifier: str):
+    APPEND(getattr(POP(), identifier)())
 
 
 BINARY_OPERATORS = {
@@ -327,7 +325,6 @@ UNARY_OPERATORS = {
     'abs': abs,
     'acos': acos,
     'acosh': acosh,
-    'air': as_integer_ratio,
     'asin': asin,
     'asinh': asinh,
     'atan': atan,
@@ -405,6 +402,7 @@ fullmatch = rc(  # noqa
         r'('  # each token is either a number or an operator
             rf'[+-]?+{N}(?:[Jj]|[-+]{N}[Jj])?+'  # complex part
             r'|\L<operators>'
+            r'|\.[^\d\W]\w*'
         r')\s*+'
     r')*+',
     operators=(
@@ -425,6 +423,8 @@ def apply(token):
         APPEND(op(POP()))
     elif (op := SPECIAL_OPERATORS.get(token)) is not None:
         op()
+    elif token[0] == '.' and (identifier := token[1:]).isidentifier():
+        call_method(identifier)
     else:
         return False
 
@@ -466,7 +466,10 @@ def main():
     while True:
         last_result = evaluate(input('>>> '))
         if last_result is not None:
-            print(FORMAT(last_result))
+            try:
+                print(FORMAT(last_result))
+            except (TypeError, ValueError):  # invalid format for the object
+                print(last_result)
 
 
 if __name__ == '__main__':

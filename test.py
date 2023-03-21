@@ -170,11 +170,8 @@ def test_notations():
     assert _kalk.FORMAT(v) == '0.33'
 
 
-@patch('builtins.print')
-def test_air(mocked_print):
+def test_as_integer_ratio_method():
     APPEND(.25)
-    assert evaluate('air') == .25
-    mocked_print.assert_called_once_with((1, 4))
+    assert evaluate('.as_integer_ratio') == (1, 4)
     APPEND(2)
-    assert evaluate('air') == 2
-    assert mocked_print.call_args == call((2, 1))
+    assert evaluate('.as_integer_ratio') == (2, 1)
