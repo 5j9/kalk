@@ -1,76 +1,14 @@
 __version__ = '0.11.1.dev0'
 
 
-from math import (
-    acos,
-    acosh,
-    asin,
-    asinh,
-    atan,
-    atan2,
-    atanh,
-    ceil,
-    comb,
-    copysign,
-    cos,
-    degrees,
-    dist,
-    e,
-    erf,
-    erfc,
-    exp,
-    expm1,
-    fabs,
-    factorial,
-    floor,
-    fmod,
-    fsum,
-    gamma,
-    gcd,
-    hypot,
-    inf,
-    isqrt,
-    lcm,
-    ldexp,
-    lgamma,
-    log,
-    log1p,
-    log2,
-    log10,
-    nan,
-    nextafter,
-    perm,
-    pi,
-    pow as fpow,
-    prod,
-    radians,
-    remainder,
-    sin,
-    sqrt,
-    tan,
-    tau,
-    trunc,
-    ulp,
-)
-from operator import (
-    add,
-    and_,
-    floordiv,
-    invert,
-    lshift,
-    mod,
-    mul,
-    neg,
-    or_,
-    rshift,
-    sub,
-    truediv,
-    xor,
-)
+from math import dist, e, floor, fsum, inf, log10, nan, pi, prod, tau
 from pprint import pprint
 
 from pyperclip import copy, paste
 from regex import compile as rc
+
+from .binary_ops import BINARY_OPERATORS
+from .unary_ops import UNARY_OPERATORS
 
 STACK = []
 APPEND = STACK.append
@@ -103,10 +41,6 @@ def dist2():
     d = dist((STACK[-4], STACK[-3]), (STACK[-2], STACK[-1]))
     del STACK[-3:]
     STACK[-1] = d
-
-
-def percent(a, b, /):
-    return (b - a) / a * 100
 
 
 def print_stack():
@@ -196,9 +130,9 @@ def recall():
 PRECISION = 5
 
 
-def precision(p):
+def precision():
     global PRECISION
-    PRECISION = p
+    PRECISION = POP()
     try:
         return STACK[-1]
     except IndexError:
@@ -291,73 +225,6 @@ def call_method(identifier: str):
     APPEND(getattr(POP(), identifier)())
 
 
-BINARY_OPERATORS = {
-    '%%': percent,
-    '٪٪': percent,
-    '%': mod,
-    '٪': mod,
-    '&': and_,
-    '*': mul,
-    '**': pow,
-    '+': add,
-    '-': sub,
-    'n': neg,
-    '/': truediv,
-    '//': floordiv,
-    '<<': lshift,
-    '>>': rshift,
-    'C': comb,
-    'P': perm,
-    '^': xor,
-    'cs': copysign,
-    'fmod': fmod,
-    'fpow': fpow,
-    'gcd': gcd,
-    'hypot': hypot,
-    'lcm': lcm,
-    'log': log,
-    'rem': remainder,
-    '|': or_,
-}
-
-UNARY_OPERATORS = {
-    '!': factorial,
-    'abs': abs,
-    'acos': acos,
-    'acosh': acosh,
-    'asin': asin,
-    'asinh': asinh,
-    'atan': atan,
-    'atan2': atan2,
-    'atanh': atanh,
-    'ceil': ceil,
-    'cos': cos,
-    'deg': degrees,
-    'erf': erf,
-    'erfc': erfc,
-    'exp': exp,
-    'expm1': expm1,
-    'fabs': fabs,
-    'floor': floor,
-    'gamma': gamma,
-    'isqrt': isqrt,
-    'ldexp': ldexp,
-    'lgamma': lgamma,
-    'log10': log10,
-    'log1p': log1p,
-    'log2': log2,
-    'nextafter': nextafter,
-    'prec': precision,
-    'rad': radians,
-    'round': round,
-    'sin': sin,
-    'sqrt': sqrt,
-    'tan': tan,
-    'trunc': trunc,
-    'ulp': ulp,
-    '~': invert,
-}
-
 SPECIAL_OPERATORS = {
     '<>': swap,
     'bin': print_bin,
@@ -379,6 +246,7 @@ SPECIAL_OPERATORS = {
     'nrm': set_normal_format,
     'oct': print_oct,
     'pi': load_pi,
+    'prec': precision,
     'prod': product,
     'pst': paste_from_clipboard,
     'rcl': recall,
