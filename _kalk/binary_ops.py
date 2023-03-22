@@ -58,4 +58,3 @@ BINARY_OPERATORS = {
     'rem': remainder,
     '|': or_,
 }
-
