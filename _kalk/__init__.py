@@ -4,7 +4,6 @@ __version__ = '0.11.1.dev0'
 from math import dist, e, floor, fsum, inf, log10, nan, pi, prod, tau
 from pprint import pprint
 
-from pyperclip import copy, paste
 from regex import compile as rc
 
 from _kalk.binary_ops import BINARY_OPERATORS
@@ -107,10 +106,12 @@ def swap():
 
 
 def paste_from_clipboard():
+    from pyperclip import paste
     evaluate(paste())
 
 
 def copy_to_clipboard():
+    from pyperclip import copy
     copy(f'{STACK[-1]}')
 
 
