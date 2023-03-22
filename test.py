@@ -175,3 +175,8 @@ def test_as_integer_ratio_method():
     assert evaluate('.as_integer_ratio') == (1, 4)
     APPEND(2)
     assert evaluate('.as_integer_ratio') == (2, 1)
+
+
+def test_strings():
+    assert evaluate('"a" "b" +') == 'ab'
+    assert evaluate('.upper') == 'AB'

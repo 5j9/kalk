@@ -7,8 +7,8 @@ from pprint import pprint
 from pyperclip import copy, paste
 from regex import compile as rc
 
-from .binary_ops import BINARY_OPERATORS
-from .unary_ops import UNARY_OPERATORS
+from _kalk.binary_ops import BINARY_OPERATORS
+from _kalk.unary_ops import UNARY_OPERATORS
 
 STACK = []
 APPEND = STACK.append
@@ -269,6 +269,7 @@ fullmatch = rc(  # noqa
     r'(?:'
         r'('  # each token is either a number or an operator
             rf'[+-]?+{N}(?:[Jj]|[-+]{N}[Jj])?+'  # complex part
+            r'|"[^"]*"'
             r'|\L<operators>'
             r'|\.[^\d\W]\w*'
         r')\s*+'
@@ -279,7 +280,7 @@ fullmatch = rc(  # noqa
         | SPECIAL_OPERATORS.keys())).fullmatch
 
 
-def apply(token):
+def operate(token):
     if (op := BINARY_OPERATORS.get(token)) is not None:
         last = POP()
         try:
@@ -304,14 +305,18 @@ def evaluate(i):
         return None
     for token in m.captures(1):
         try:
-            if apply(token) is not False:
-                continue
+            if operate(token) is not False:
+                continue  # the token has been an operator
         except IndexError:
             print('Error: not enough arguments')
             continue
         except Exception as e:
             print(type(e).__name__)
             return
+
+        if token[0] == '"':
+            APPEND(eval(token))
+            continue
 
         token = token.replace(',', '').replace('_', '')
         try:
