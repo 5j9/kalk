@@ -53,10 +53,8 @@ def test_distance():
     assert evaluate('0 1 0 0 dist2') == 1.0
 
 
-@patch('builtins.print')
-def test_chr(mocked_print):
-    assert evaluate('65.1 chr') == 65.1
-    mocked_print.assert_called_once_with('A')
+def test_chr():
+    assert evaluate('65 chr') == 'A'
 
 
 def test_sum_fsum():

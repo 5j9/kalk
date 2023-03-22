@@ -73,24 +73,8 @@ def load_inf():
     APPEND(inf)
 
 
-def print_bin():
-    print(bin(STACK[-1]))
-
-
 def print_min():
     print(min(STACK))
-
-
-def print_chr():
-    print(chr(int(STACK[-1])))
-
-
-def print_hex():
-    print(hex(STACK[-1]))
-
-
-def print_oct():
-    print(oct(STACK[-1]))
 
 
 def print_max():
@@ -228,9 +212,7 @@ def call_method(identifier: str):
 
 SPECIAL_OPERATORS = {
     '<>': swap,
-    'bin': print_bin,
     'c': CLEAR,
-    'chr': print_chr,
     'cp': copy_to_clipboard,
     'del': delete,
     'dist2': dist2,
@@ -239,13 +221,11 @@ SPECIAL_OPERATORS = {
     'fsum': fsum_all,
     'gen': set_general_format,
     'h': display_help,
-    'hex': print_hex,
     'inf': load_inf,
     'max': print_max,
     'min': print_min,
     'nan': load_nan,
     'nrm': set_normal_format,
-    'oct': print_oct,
     'pi': load_pi,
     'prec': precision,
     'prod': product,
