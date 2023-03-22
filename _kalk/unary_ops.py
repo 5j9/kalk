@@ -47,10 +47,29 @@ def dt(value):
     raise ValueError('unknown format for jdt')
 
 
-def td(days):
-    """Convert days to datetime.timedelta."""
+def weeks(val):
     import datetime
-    return datetime.timedelta(days)
+    return datetime.timedelta(weeks=val)
+
+
+def days(val):
+    import datetime
+    return datetime.timedelta(val)
+
+
+def hours(val):
+    import datetime
+    return datetime.timedelta(hours=val)
+
+
+def minutes(val):
+    import datetime
+    return datetime.timedelta(minutes=val)
+
+
+def seconds(val):
+    import datetime
+    return datetime.timedelta(seconds=val)
 
 
 def jdt(value):
@@ -83,6 +102,7 @@ UNARY_OPERATORS = {
     'ceil': ceil,
     'chr': chr,
     'cos': cos,
+    'days': days,
     'deg': degrees,
     'dt': dt,
     'erf': erf,
@@ -93,6 +113,7 @@ UNARY_OPERATORS = {
     'floor': floor,
     'gamma': gamma,
     'hex': hex,
+    'hours': hours,
     'isqrt': isqrt,
     'jdt': jdt,
     'ldexp': ldexp,
@@ -100,16 +121,18 @@ UNARY_OPERATORS = {
     'log10': log10,
     'log1p': log1p,
     'log2': log2,
+    'minutes': minutes,
     'nextafter': nextafter,
     'not': not_,
     'oct': oct,
     'rad': radians,
     'round': round,
+    'seconds': seconds,
     'sin': sin,
     'sqrt': sqrt,
     'tan': tan,
-    'td': td,
     'trunc': trunc,
     'ulp': ulp,
+    'weeks': weeks,
     '~': invert,
 }

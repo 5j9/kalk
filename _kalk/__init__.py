@@ -6,8 +6,8 @@ from pprint import pprint
 
 from regex import compile as rc
 
-from .binary_ops import BINARY_OPERATORS
-from .unary_ops import UNARY_OPERATORS
+from _kalk.binary_ops import BINARY_OPERATORS
+from _kalk.unary_ops import UNARY_OPERATORS
 
 STACK = []
 APPEND = STACK.append

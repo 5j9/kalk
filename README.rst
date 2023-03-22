@@ -70,10 +70,10 @@ You can even do ``datetime`` and ``timedelta`` calculations:
 
     >>> "2023-03-22" dt
     2023-03-22 00:00:00
-	>>> 2 td
-	2 days, 0:00:00
+	>>> 2 days 3 hours +
+	2 days, 3:00:00
 	>>> -
-	2023-03-20 00:00:00
+	2023-03-19 21:00:00
 
 
 Handy operators:
