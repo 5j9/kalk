@@ -6,8 +6,8 @@ from pprint import pprint
 
 from regex import compile as rc
 
-from _kalk.binary_ops import BINARY_OPERATORS
-from _kalk.unary_ops import UNARY_OPERATORS
+from .binary_ops import BINARY_OPERATORS
+from .unary_ops import UNARY_OPERATORS
 
 STACK = []
 APPEND = STACK.append
@@ -323,6 +323,7 @@ def evaluate(i):
 
 
 def main():
+    print(f'Kalk v{__version__}')
     while True:
         last_result = evaluate(input('>>> '))
         if isinstance(last_result, (int, float)):
