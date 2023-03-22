@@ -31,8 +31,20 @@ from math import (
     trunc,
     ulp,
 )
-from datetime import datetime, timedelta
 from operator import invert
+
+
+def dt(string):
+    """datetime.datetime.fromisoformat"""
+    from datetime import datetime
+    return datetime.fromisoformat(string)
+
+
+def td(days):
+    """datetime.timedelta"""
+    from datetime import timedelta
+    return timedelta(days)
+
 
 UNARY_OPERATORS = {
     '!': factorial,
@@ -47,7 +59,7 @@ UNARY_OPERATORS = {
     'ceil': ceil,
     'cos': cos,
     'deg': degrees,
-    'dt': datetime.fromisoformat,
+    'dt': dt,
     'erf': erf,
     'erfc': erfc,
     'exp': exp,
@@ -67,7 +79,7 @@ UNARY_OPERATORS = {
     'sin': sin,
     'sqrt': sqrt,
     'tan': tan,
-    'td': timedelta,
+    'td': td,
     'trunc': trunc,
     'ulp': ulp,
     '~': invert,
