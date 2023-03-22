@@ -63,6 +63,19 @@ and many more:
     >>> 1 2 3 4 5 sum
     15
 
+
+You can even do ``datetime`` and ``timedelta`` calculations:
+
+.. code-block:: python
+
+    >>> "2023-03-22" dt
+    2023-03-22 00:00:00
+	>>> 2 td
+	2 days, 0:00:00
+	>>> -
+	2023-03-20 00:00:00
+
+
 Handy operators:
 
 * ``<>`` swaps the place of the last two values in the stack.
