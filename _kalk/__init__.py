@@ -338,11 +338,10 @@ def evaluate(i):
 def main():
     while True:
         last_result = evaluate(input('>>> '))
-        if last_result is not None:
-            try:
-                print(FORMAT(last_result))
-            except (TypeError, ValueError):  # invalid format for the object
-                print(last_result)
+        if isinstance(last_result, (int, float)):
+            print(FORMAT(last_result))
+        else:
+            print(last_result)
 
 
 if __name__ == '__main__':

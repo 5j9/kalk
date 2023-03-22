@@ -180,3 +180,9 @@ def test_as_integer_ratio_method():
 def test_strings():
     assert evaluate('"a" "b" +') == 'ab'
     assert evaluate('.upper') == 'AB'
+
+
+def test_datetime_timedelta():
+    from datetime import timedelta
+    assert evaluate('"2023-03-22" dt "2023-02-22" dt -') == timedelta(28)
+    assert evaluate('28 td +') == timedelta(56)

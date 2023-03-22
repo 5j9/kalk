@@ -31,6 +31,7 @@ from math import (
     trunc,
     ulp,
 )
+from datetime import datetime, timedelta
 from operator import invert
 
 UNARY_OPERATORS = {
@@ -46,6 +47,7 @@ UNARY_OPERATORS = {
     'ceil': ceil,
     'cos': cos,
     'deg': degrees,
+    'dt': datetime.fromisoformat,
     'erf': erf,
     'erfc': erfc,
     'exp': exp,
@@ -65,6 +67,7 @@ UNARY_OPERATORS = {
     'sin': sin,
     'sqrt': sqrt,
     'tan': tan,
+    'td': timedelta,
     'trunc': trunc,
     'ulp': ulp,
     '~': invert,
