@@ -57,6 +57,8 @@ def jdt(value):
     """Convert value to jdatetime.datetime."""
     import jdatetime
     if isinstance(value, str):
+        # todo: use fromisostring when the following issue is resolved
+        # https://github.com/slashmili/python-jalali/issues/134
         return jdatetime.datetime.strptime(value, '%Y-%m-%d')
 
     import datetime
