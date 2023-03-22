@@ -1,4 +1,4 @@
-__version__ = '0.11.1.dev0'
+__version__ = '0.12.0'
 
 
 from math import dist, e, floor, fsum, inf, log10, nan, pi, prod, tau
