@@ -210,6 +210,11 @@ def call_method(identifier: str):
     APPEND(getattr(POP(), identifier)())
 
 
+def now():
+    import datetime
+    APPEND(datetime.datetime.now())
+
+
 SPECIAL_OPERATORS = {
     '<>': swap,
     'c': CLEAR,
@@ -225,6 +230,7 @@ SPECIAL_OPERATORS = {
     'max': print_max,
     'min': print_min,
     'nan': load_nan,
+    'now': now,
     'nrm': set_normal_format,
     'pi': load_pi,
     'prec': precision,

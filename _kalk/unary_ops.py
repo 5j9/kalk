@@ -31,19 +31,39 @@ from math import (
     trunc,
     ulp,
 )
-from operator import invert
+from operator import invert, not_
 
 
-def dt(string):
-    """datetime.datetime.fromisoformat"""
-    from datetime import datetime
-    return datetime.fromisoformat(string)
+def dt(value):
+    """Convert value to datetime using datetime.datetime.fromisoformat."""
+    if isinstance(value, str):
+        import datetime
+        return datetime.datetime.fromisoformat(value)
+
+    import jdatetime
+    if isinstance(value, jdatetime.datetime):
+        return value.togregorian()
+
+    raise ValueError('unknown format for jdt')
 
 
 def td(days):
-    """datetime.timedelta"""
-    from datetime import timedelta
-    return timedelta(days)
+    """Convert days to datetime.timedelta."""
+    import datetime
+    return datetime.timedelta(days)
+
+
+def jdt(value):
+    """Convert value to jdatetime.datetime."""
+    import jdatetime
+    if isinstance(value, str):
+        return jdatetime.datetime.strptime(value, '%Y-%m-%d')
+
+    import datetime
+    if isinstance(value, datetime.datetime):
+        return jdatetime.datetime.fromgregorian(datetime=value)
+
+    raise ValueError('unknown format for jdt')
 
 
 UNARY_OPERATORS = {
@@ -57,6 +77,7 @@ UNARY_OPERATORS = {
     'atan2': atan2,
     'atanh': atanh,
     'bin': bin,
+    'bool': bool,
     'ceil': ceil,
     'chr': chr,
     'cos': cos,
@@ -71,12 +92,14 @@ UNARY_OPERATORS = {
     'gamma': gamma,
     'hex': hex,
     'isqrt': isqrt,
+    'jdt': jdt,
     'ldexp': ldexp,
     'lgamma': lgamma,
     'log10': log10,
     'log1p': log1p,
     'log2': log2,
     'nextafter': nextafter,
+    'not': not_,
     'oct': oct,
     'rad': radians,
     'round': round,
