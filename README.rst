@@ -49,19 +49,14 @@ Kalk ignores ``,`` (thousands separator) within numbers.
     >>> 1,234 1 +
     1,235
 
-Most of the functions defined in Python's math_ module are supported.
+Most of the functions defined in Python's math_ and statistics_ modules are supported.
 
 .. code-block:: python
 
     >>> 6 lgamma
     4.787491742782047
 
-and many more:
-
-.. code-block:: python
-
-    >>> 1 2 3 4 5 sum
-    15
+and many more.
 
 
 You can even do ``datetime`` and ``timedelta`` calculations:
@@ -107,5 +102,6 @@ Handy operators:
 .. _power operator: https://docs.python.org/3/reference/expressions.html#the-power-operator
 .. _bitwise XOR: https://docs.python.org/3/reference/expressions.html#binary-bitwise-operations
 .. _math: https://docs.python.org/3/library/math.html
+.. _statistics: https://docs.python.org/3/library/statistics.html
 .. _operator: https://docs.python.org/3/library/operator.html
 .. _Euler's number: https://en.wikipedia.org/wiki/E_(mathematical_constant)

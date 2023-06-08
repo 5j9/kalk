@@ -9,6 +9,12 @@ from regex import compile as rc
 from _kalk.binary_ops import BINARY_OPERATORS
 from _kalk.unary_ops import UNARY_OPERATORS
 
+from statistics import (
+    covariance,
+    correlation,
+    linear_regression,
+)
+
 STACK = []
 STACKS = [STACK]
 
@@ -16,10 +22,14 @@ STACKS = [STACK]
 STORAGE = {}
 
 
-def dist():
-    d = math.dist(STACK[-1], STACK[-2])
-    del STACK[-1]
-    STACK[-1] = d
+def two_arg_factory(func):
+    def f():
+        d = func(STACK[-1], STACK[-2])
+        del STACK[-1]
+        STACK[-1] = d
+    f.__doc__ = func.__doc__
+    f.__name__ = func.__name__
+    return f
 
 
 def print_stack():
@@ -211,13 +221,16 @@ SPECIAL_OPERATORS = {
     ']': end_substack,
     'a': ans,
     'c': clear_stack,
+    'corr': two_arg_factory(correlation),
+    'covar': two_arg_factory(covariance),
     'cp': copy_to_clipboard,
     'del': delete,
-    'dist': dist,
+    'dist': two_arg_factory(math.dist),
     'eng': set_eng_format,
     'es': enter_substack,
     'gen': set_general_format,
     'h': display_help,
+    'linreg': two_arg_factory(linear_regression),
     'now': now,
     'nrm': set_normal_format,
     'prec': precision,
