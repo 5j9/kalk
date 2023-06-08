@@ -1,6 +1,5 @@
 __version__ = '0.13.1.dev0'
 
-
 from math import dist, e, floor, fsum, inf, log10, nan, pi, prod, tau
 from pprint import pprint
 from statistics import (
@@ -69,14 +68,6 @@ def load_nan():
 
 def load_inf():
     APPEND(inf)
-
-
-def print_min():
-    print(min(STACK))
-
-
-def print_max():
-    print(max(STACK))
 
 
 def ans():
@@ -214,7 +205,7 @@ def now():
     APPEND(datetime.datetime.now())
 
 
-def _whole_stack(func):
+def whole_stack(func):
     def f():
         m = func(STACK)
         CLEAR()
@@ -241,39 +232,39 @@ SPECIAL_OPERATORS = {
     'dist2': dist2,
     'e': loud_eulers_number,
     'eng': set_eng_format,
-    'fmean': _whole_stack(fmean),
-    'fsum': _whole_stack(fsum),
+    'fmean': whole_stack(fmean),
+    'fsum': whole_stack(fsum),
     'gen': set_general_format,
-    'gmean': _whole_stack(geometric_mean),
+    'gmean': whole_stack(geometric_mean),
     'h': display_help,
-    'hmean': _whole_stack(harmonic_mean),
+    'hmean': whole_stack(harmonic_mean),
     'inf': load_inf,
-    'max': print_max,
-    'mean': _whole_stack(mean),
-    'med': _whole_stack(median),
-    'medg': _whole_stack(median_grouped),
-    'medh': _whole_stack(median_high),
-    'medl': _whole_stack(median_low),
-    'min': print_min,
-    'mode': _whole_stack(mode),
-    'multimode': _whole_stack(multimode),
+    'max': whole_stack(max),
+    'mean': whole_stack(mean),
+    'med': whole_stack(median),
+    'medg': whole_stack(median_grouped),
+    'medh': whole_stack(median_high),
+    'medl': whole_stack(median_low),
+    'min': whole_stack(min),
+    'mode': whole_stack(mode),
+    'multimode': whole_stack(multimode),
     'nan': load_nan,
     'now': now,
     'nrm': set_normal_format,
     'pi': load_pi,
     'prec': precision,
-    'prod': _whole_stack(prod),
+    'prod': whole_stack(prod),
     'pst': paste_from_clipboard,
-    'pstdev': _whole_stack(pstdev),
-    'pvar': _whole_stack(pvariance),
+    'pstdev': whole_stack(pstdev),
+    'pvar': whole_stack(pvariance),
     'rcl': recall,
     's': print_stack,
     'sci': set_sci_format,
-    'stdev': _whole_stack(stdev),
+    'stdev': whole_stack(stdev),
     'sto': store,
-    'sum': _whole_stack(sum),
+    'sum': whole_stack(sum),
     'tau': load_tau,
-    'var': _whole_stack(variance),
+    'var': whole_stack(variance),
 }
 
 N = ( # noqa
