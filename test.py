@@ -58,8 +58,8 @@ def test_chr():
 
 
 def test_sum_fsum():
-    assert evaluate('c 1 2 3sum') == 6
-    assert evaluate('6fsum') == 12.0
+    assert evaluate('[[1 2 3]sum') == 6
+    assert evaluate('6]fsum') == 12.0
 
 
 def test_thousand_separator():
@@ -188,7 +188,7 @@ def test_lt():
 
 
 def test_gmean():
-    assert evaluate('c 54 24 36 gmean round') == 36.0
+    assert evaluate('[54 24 36] gmean round') == 36.0
 
 
 def test_substacks():

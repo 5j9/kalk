@@ -1,24 +1,8 @@
 __version__ = '0.13.1.dev0'
 
 import math
-from math import floor, fsum, log10, prod
+from math import floor, log10
 from pprint import pprint
-from statistics import (
-    fmean,
-    geometric_mean,
-    harmonic_mean,
-    mean,
-    median,
-    median_grouped,
-    median_high,
-    median_low,
-    mode,
-    multimode,
-    pstdev,
-    pvariance,
-    stdev,
-    variance,
-)
 
 from regex import compile as rc
 
@@ -190,16 +174,6 @@ def now():
     STACK.append(datetime.datetime.now())
 
 
-def whole_stack(func):
-    def f():
-        m = func(STACK)
-        del STACK[:]
-        STACK.append(m)
-    f.__name__ = func.__name__
-    f.__doc__ = func.__doc__
-    return f
-
-
 def str_help():
     string = STACK.pop()
     op = UNARY_OPERATORS.get(string) or SPECIAL_OPERATORS.get(string) or UNARY_OPERATORS.get(string)
@@ -230,47 +204,28 @@ def enter_substack():
 
 
 SPECIAL_OPERATORS = {
+    '<>': swap,
+    '?': str_help,
+    'SI': toggle_si_format,
     '[': start_substack,
     ']': end_substack,
-    'es': enter_substack,
-    '?': str_help,
-    '<>': swap,
-    'SI': toggle_si_format,
     'a': ans,
     'c': clear_stack,
     'cp': copy_to_clipboard,
     'del': delete,
     'dist': dist,
     'eng': set_eng_format,
-    'fmean': whole_stack(fmean),
-    'fsum': whole_stack(fsum),
+    'es': enter_substack,
     'gen': set_general_format,
-    'gmean': whole_stack(geometric_mean),
     'h': display_help,
-    'hmean': whole_stack(harmonic_mean),
-    'max': whole_stack(max),
-    'mean': whole_stack(mean),
-    'med': whole_stack(median),
-    'medg': whole_stack(median_grouped),
-    'medh': whole_stack(median_high),
-    'medl': whole_stack(median_low),
-    'min': whole_stack(min),
-    'mode': whole_stack(mode),
-    'multimode': whole_stack(multimode),
     'now': now,
     'nrm': set_normal_format,
     'prec': precision,
-    'prod': whole_stack(prod),
     'pst': paste_from_clipboard,
-    'pstdev': whole_stack(pstdev),
-    'pvar': whole_stack(pvariance),
     'rcl': recall,
     's': print_stack,
     'sci': set_sci_format,
-    'stdev': whole_stack(stdev),
     'sto': store,
-    'sum': whole_stack(sum),
-    'var': whole_stack(variance),
 }
 
 for const in 'tau', 'pi', 'e', 'nan', 'inf':
