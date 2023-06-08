@@ -65,21 +65,21 @@ You can even do ``datetime`` and ``timedelta`` calculations:
 
     >>> "2023-03-22" dt
     2023-03-22 00:00:00
-	>>> 2 days 3 hours +
-	2 days, 3:00:00
-	>>> -
-	2023-03-19 21:00:00
+    >>> 2 days 3 hours +
+    2 days, 3:00:00
+    >>> -
+    2023-03-19 21:00:00
 
 Start a substack (a list) with a ``[`` and end it with a ``]``. Some functions require lists as argument. For example to calculate the distance between two points or sum of some numbers:
 
 .. code-block:: python
 
     >>> [2 -1] [-2 2] dist
-	5.0
-	>>> [0 0 0] [1 1 1] dist
-	1.7320508075688772
-	>>> [1 1 1] sum
-	3
+    5.0
+    >>> [0 0 0] [1 1 1] dist
+    1.7320508075688772
+    >>> [1 1 1] sum
+    3
 
 
 Handy operators:
