@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from _kalk import APPEND, CLEAR, STACK, evaluate
+from _kalk import STACK, evaluate
 
 
 def test_add():
@@ -12,9 +12,9 @@ def test_negative():
 
 
 def test_empty():
-    CLEAR()
+    del STACK[:]
     assert evaluate('') is None
-    APPEND(1)
+    STACK.append(1)
     assert evaluate('') == 1
 
 
@@ -40,8 +40,7 @@ def test_factorial():
 
 @patch('builtins.print')
 def test_invalid_op(mocked_print):
-    CLEAR()
-    assert evaluate('sin') is None
+    assert evaluate('c sin') is None
     mocked_print.assert_called_once_with('Error: not enough arguments')
 
 
@@ -51,7 +50,7 @@ def test_eulers_number():
 
 
 def test_distance():
-    assert evaluate('0 1 0 0 dist2') == 1.0
+    assert evaluate('[0 1] [0 0] dist') == 1.0
 
 
 def test_chr():
@@ -68,10 +67,7 @@ def test_thousand_separator():
 
 
 def test_swap():
-    CLEAR()
-    APPEND(1)
-    APPEND(2)
-    evaluate('<>')
+    evaluate('c 1 2 <>')
     assert STACK == [2, 1]
 
 
@@ -99,9 +95,7 @@ def test_syntax_error(mocked_print):
 
 @patch('builtins.print')
 def test_preserve_stack_on_binary_fail(mocked_print):
-    CLEAR()
-    APPEND(1)
-    evaluate('*')
+    evaluate('c 1 *')
     assert STACK == [1]
     mocked_print.assert_called_once_with('Error: not enough arguments')
 
@@ -119,22 +113,17 @@ def test_copy_paste(copy_mock):
 
 
 def test_pop():
-    CLEAR()
-    APPEND(7)
-    APPEND(8)
-    assert evaluate('1 del') == 7
+    assert evaluate('c 7 8 1 del') == 7
     assert STACK == [7]
 
 
 def test_answer():
-    APPEND(7)
-    assert evaluate('a +') == 14
+    assert evaluate('7 a +') == 14
 
 
 @patch('builtins.print')
 def test_sto_rcl(mocked_print):
-    CLEAR()
-    assert evaluate('1 2 sto 3 4 + 2 rcl +') == 8
+    assert evaluate('c 1 2 sto 3 4 + 2 rcl +') == 8
     assert evaluate('1 rcl +') is None
     mocked_print.assert_called_once_with('KeyError')
 
@@ -169,10 +158,8 @@ def test_notations():
 
 
 def test_as_integer_ratio_method():
-    APPEND(.25)
-    assert evaluate('.as_integer_ratio') == (1, 4)
-    APPEND(2)
-    assert evaluate('.as_integer_ratio') == (2, 1)
+    assert evaluate('.25 .as_integer_ratio') == (1, 4)
+    assert evaluate('2 .as_integer_ratio') == (2, 1)
 
 
 def test_strings():
@@ -202,3 +189,8 @@ def test_lt():
 
 def test_gmean():
     assert evaluate('c 54 24 36 gmean round') == 36.0
+
+
+def test_substacks():
+    evaluate('c 1 2 [3 4] es 5 ] 6')
+    assert STACK == [1, 2, [3, 4, 5], 6]

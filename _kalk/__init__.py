@@ -1,7 +1,7 @@
 __version__ = '0.13.1.dev0'
 
 import math
-from math import dist, floor, fsum, log10, prod
+from math import floor, fsum, log10, prod
 from pprint import pprint
 from statistics import (
     fmean,
@@ -26,23 +26,21 @@ from _kalk.binary_ops import BINARY_OPERATORS
 from _kalk.unary_ops import UNARY_OPERATORS
 
 STACK = []
-APPEND = STACK.append
-CLEAR = STACK.clear
-POP = STACK.pop
+STACKS = [STACK]
 
 
 STORAGE = {}
 
 
-def dist2():
-    d = dist((STACK[-4], STACK[-3]), (STACK[-2], STACK[-1]))
-    del STACK[-3:]
+def dist():
+    d = math.dist(STACK[-1], STACK[-2])
+    del STACK[-1]
     STACK[-1] = d
 
 
 def print_stack():
     for i, n in enumerate(STACK):
-        print(f'{i}: {n:,}')
+        print(f'{i}: {n}')
 
 
 def display_help():
@@ -53,12 +51,12 @@ def display_help():
 def load_constant_factory(name):
     val = getattr(math, name)
     def load_constant():
-        APPEND(val)
+        STACK.append(val)
     load_constant.__doc__ = f"""Load {name} = {val} into the stack."""
     return load_constant
 
 def ans():
-    APPEND(STACK[-1])
+    STACK.append(STACK[-1])
 
 
 def swap():
@@ -81,12 +79,12 @@ def delete():
 
 
 def store():
-    k = POP()
-    STORAGE[k] = POP()
+    k = STACK.pop()
+    STORAGE[k] = STACK.pop()
 
 
 def recall():
-    APPEND(STORAGE[POP()])
+    STACK.append(STORAGE[STACK.pop()])
 
 
 PRECISION = 5
@@ -94,7 +92,7 @@ PRECISION = 5
 
 def precision():
     global PRECISION
-    PRECISION = POP()
+    PRECISION = STACK.pop()
     try:
         return STACK[-1]
     except IndexError:
@@ -184,39 +182,65 @@ def set_general_format():
 
 
 def call_method(identifier: str):
-    APPEND(getattr(POP(), identifier)())
+    STACK.append(getattr(STACK.pop(), identifier)())
 
 
 def now():
     import datetime
-    APPEND(datetime.datetime.now())
+    STACK.append(datetime.datetime.now())
 
 
 def whole_stack(func):
     def f():
         m = func(STACK)
-        CLEAR()
-        APPEND(m)
+        del STACK[:]
+        STACK.append(m)
     f.__name__ = func.__name__
     f.__doc__ = func.__doc__
     return f
 
 
 def str_help():
-    string = POP()
+    string = STACK.pop()
     op = UNARY_OPERATORS.get(string) or SPECIAL_OPERATORS.get(string) or UNARY_OPERATORS.get(string)
     help(op)
 
 
+def clear_stack():
+    del STACK[:]
+
+
+def start_substack():
+    global STACK
+    new_stack = []
+    STACK.append(new_stack)
+    STACK = new_stack
+    STACKS.append(new_stack)
+
+
+def end_substack():
+    global STACK
+    STACKS.pop()
+    STACK = STACKS[-1]
+
+def enter_substack():
+    global STACK
+    STACK = STACK[-1]
+    STACKS.append(STACK)
+
+
 SPECIAL_OPERATORS = {
+    '[': start_substack,
+    ']': end_substack,
+    'es': enter_substack,
     '?': str_help,
     '<>': swap,
     'SI': toggle_si_format,
     'a': ans,
-    'c': CLEAR,
+    'c': clear_stack,
     'cp': copy_to_clipboard,
     'del': delete,
-    'dist2': dist2,
+    'dist': dist,
     'eng': set_eng_format,
     'fmean': whole_stack(fmean),
     'fsum': whole_stack(fsum),
@@ -276,14 +300,14 @@ fullmatch = rc(  # noqa
 
 def operate(token):
     if (op := BINARY_OPERATORS.get(token)) is not None:
-        last = POP()
+        last = STACK.pop()
         try:
-            APPEND(op(POP(), last))
+            STACK.append(op(STACK.pop(), last))
         except IndexError:
-            APPEND(last)
+            STACK.append(last)
             raise
     elif (op := UNARY_OPERATORS.get(token)) is not None:
-        APPEND(op(POP()))
+        STACK.append(op(STACK.pop()))
     elif (op := SPECIAL_OPERATORS.get(token)) is not None:
         op()
     elif token[0] == '.' and (identifier := token[1:]).isidentifier():
@@ -309,7 +333,7 @@ def evaluate(i):
             return
 
         if token[0] == '"':
-            APPEND(eval(token))
+            STACK.append(eval(token))
             continue
 
         token = token.replace(',', '').replace('_', '')
@@ -321,7 +345,7 @@ def evaluate(i):
         except ValueError:
             result = complex(token)
 
-        APPEND(result)
+        STACK.append(result)
 
     try:
         return STACK[-1]
