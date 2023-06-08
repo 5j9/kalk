@@ -84,6 +84,7 @@ def ans():
 
 
 def swap():
+    """Swap the place of last two results on the stack"""
     STACK[-2:] = reversed(STACK[-2:])
 
 
@@ -223,7 +224,14 @@ def _whole_stack(func):
     return f
 
 
+def str_help():
+    string = POP()
+    op = UNARY_OPERATORS.get(string) or SPECIAL_OPERATORS.get(string) or UNARY_OPERATORS.get(string)
+    help(op)
+
+
 SPECIAL_OPERATORS = {
+    '?': str_help,
     '<>': swap,
     'SI': toggle_si_format,
     'a': ans,

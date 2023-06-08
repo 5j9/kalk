@@ -83,13 +83,14 @@ Handy operators:
 * ``cp`` copies the last result to clipboard.
 * ``del`` deletes the last ``n + 1`` values from from the stack with ``n`` being the last value in the stack.
 * ``e`` adds `Euler's number` to the stack
-* ``h`` prints a list of all operators. (still needs lots of refinements.)
 * ``pi`` adds the pi constant to the stack
 * ``pst`` pastes the contents of clipboard and evaluates it.
 * ``a`` the last answer
 * ``s`` prints the stack
 * ``sto`` stores the value before the last in storage using the last stack value as the key.
 * ``rcl`` recalls the value in storage using the last stack value as the key.
+* ``h`` prints a list of all operators. (still needs lots of refinements.)
+* ``?`` prints the docstring of the operator given as a string. For example ``"<>" ?`` will print the help string on swap. Note that not all functions have documentation yet.
 
 .. _RPN: https://en.wikipedia.org/wiki/Reverse_Polish_notation
 .. _power operator: https://docs.python.org/3/reference/expressions.html#the-power-operator
