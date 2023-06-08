@@ -1,12 +1,43 @@
 [build-system]
-requires = [
-    # 46.4.0 is required for handling attr version, see:
-    # https://packaging.python.org/guides/single-sourcing-package-version/
-    "setuptools>=46.4.0",
-    "wheel"
-]
+requires = ["setuptools>=66.1.0"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "kalk"
+authors = [{name = "5j9", email = "5j9@users.noreply.github.com"}]
+license = {text = "GNU General Public License v3 (GPLv3)"}
+description = "a simple cli RPN calculator written in Python"
+keywords = ["calculator", "kalkulator", "cli", "RPN"]
+classifiers = [
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Programming Language :: Python :: 3.9",
+    "Topic :: Scientific/Engineering",
+]
+urls = {Homepage = "https://github.com/5j9/kalk"}
+requires-python = ">=3.9"
+dependencies = ["regex", "pyperclip"]
+dynamic = ["version"]
+
+[project.readme]
+file = "README.rst"
+content-type = "text/x-rst"
+
+[project.optional-dependencies]
+tests = ["pytest"]
+
+[project.scripts]
+kalk = "_kalk:main"
+
+[tool.setuptools]
+packages = ["_kalk"]
+zip-safe = true
+include-package-data = false
+
+[tool.setuptools.dynamic]
+version = {attr = "_kalk.__version__"}
 
 [tool.isort]
 profile = "black"
+line_length = 79
 combine_as_imports = true
