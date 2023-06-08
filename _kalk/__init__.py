@@ -1,6 +1,7 @@
 __version__ = '0.13.1.dev0'
 
-from math import dist, e, floor, fsum, inf, log10, nan, pi, prod, tau
+import math
+from math import dist, floor, fsum, log10, prod
 from pprint import pprint
 from statistics import (
     fmean,
@@ -49,26 +50,12 @@ def display_help():
     pprint(UNARY_OPERATORS)
     pprint(SPECIAL_OPERATORS)
 
-
-def loud_eulers_number():
-    APPEND(e)
-
-
-def load_pi():
-    APPEND(pi)
-
-
-def load_tau():
-    APPEND(tau)
-
-
-def load_nan():
-    APPEND(nan)
-
-
-def load_inf():
-    APPEND(inf)
-
+def load_constant_factory(name):
+    val = getattr(math, name)
+    def load_constant():
+        APPEND(val)
+    load_constant.__doc__ = f"""Load {name} = {val} into the stack."""
+    return load_constant
 
 def ans():
     APPEND(STACK[-1])
@@ -230,7 +217,6 @@ SPECIAL_OPERATORS = {
     'cp': copy_to_clipboard,
     'del': delete,
     'dist2': dist2,
-    'e': loud_eulers_number,
     'eng': set_eng_format,
     'fmean': whole_stack(fmean),
     'fsum': whole_stack(fsum),
@@ -238,7 +224,6 @@ SPECIAL_OPERATORS = {
     'gmean': whole_stack(geometric_mean),
     'h': display_help,
     'hmean': whole_stack(harmonic_mean),
-    'inf': load_inf,
     'max': whole_stack(max),
     'mean': whole_stack(mean),
     'med': whole_stack(median),
@@ -248,10 +233,8 @@ SPECIAL_OPERATORS = {
     'min': whole_stack(min),
     'mode': whole_stack(mode),
     'multimode': whole_stack(multimode),
-    'nan': load_nan,
     'now': now,
     'nrm': set_normal_format,
-    'pi': load_pi,
     'prec': precision,
     'prod': whole_stack(prod),
     'pst': paste_from_clipboard,
@@ -263,9 +246,12 @@ SPECIAL_OPERATORS = {
     'stdev': whole_stack(stdev),
     'sto': store,
     'sum': whole_stack(sum),
-    'tau': load_tau,
     'var': whole_stack(variance),
 }
+
+for const in 'tau', 'pi', 'e', 'nan', 'inf':
+    SPECIAL_OPERATORS[const] = load_constant_factory(const)
+
 
 N = ( # noqa
     r'(?>'

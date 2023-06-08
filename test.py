@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from _kalk import APPEND, CLEAR, STACK, e, evaluate
+from _kalk import APPEND, CLEAR, STACK, evaluate
 
 
 def test_add():
@@ -46,7 +46,8 @@ def test_invalid_op(mocked_print):
 
 
 def test_eulers_number():
-    assert evaluate('e') is e
+    import math
+    assert evaluate('e') is math.e
 
 
 def test_distance():
