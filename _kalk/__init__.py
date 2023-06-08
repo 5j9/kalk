@@ -3,17 +3,12 @@ __version__ = '0.13.1.dev0'
 import math
 from math import floor, log10
 from pprint import pprint
+from statistics import correlation, covariance, linear_regression
 
 from regex import compile as rc
 
 from _kalk.binary_ops import BINARY_OPERATORS
 from _kalk.unary_ops import UNARY_OPERATORS
-
-from statistics import (
-    covariance,
-    correlation,
-    linear_regression,
-)
 
 STACK = []
 STACKS = [STACK]
