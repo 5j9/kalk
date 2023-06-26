@@ -179,6 +179,16 @@ def now():
     STACK.append(datetime.datetime.now())
 
 
+def utcnow():
+    import datetime
+    STACK.append(datetime.datetime.utcnow())
+
+
+def today():
+    import datetime
+    STACK.append(datetime.date.today())
+
+
 def str_help():
     string = STACK.pop()
     op = UNARY_OPERATORS.get(string) or SPECIAL_OPERATORS.get(string) or UNARY_OPERATORS.get(string)
@@ -234,6 +244,8 @@ SPECIAL_OPERATORS = {
     's': print_stack,
     'sci': set_sci_format,
     'sto': store,
+    'today': today,
+    'utcnow': utcnow,
 }
 
 for const in 'tau', 'pi', 'e', 'nan', 'inf':
