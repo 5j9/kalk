@@ -22,6 +22,7 @@ def two_arg_factory(func):
         d = func(STACK[-1], STACK[-2])
         del STACK[-1]
         STACK[-1] = d
+
     f.__doc__ = func.__doc__
     f.__name__ = func.__name__
     return f
@@ -37,12 +38,16 @@ def display_help():
     pprint(UNARY_OPERATORS)
     pprint(SPECIAL_OPERATORS)
 
+
 def load_constant_factory(name):
     val = getattr(math, name)
+
     def load_constant():
         STACK.append(val)
+
     load_constant.__doc__ = f"""Load {name} = {val} into the stack."""
     return load_constant
+
 
 def ans():
     STACK.append(STACK[-1])
@@ -55,16 +60,18 @@ def swap():
 
 def paste_from_clipboard():
     from pyperclip import paste
+
     evaluate(paste())
 
 
 def copy_to_clipboard():
     from pyperclip import copy
+
     copy(f'{STACK[-1]}')
 
 
 def delete():
-    del STACK[-STACK[-1] - 1:]
+    del STACK[-STACK[-1] - 1 :]
 
 
 def store():
@@ -138,7 +145,7 @@ def set_eng_format():
 
         exp = int(floor(log10(x)))
         exp3 = exp - (exp % 3)
-        x3 = x / (10 ** exp3)
+        x3 = x / (10**exp3)
 
         if SI is True and -24 <= exp3 <= 24 and exp3 != 0:
             exp3_text = 'yzafpnum kMGTPEZY'[(exp3 + 24) // 3]
@@ -176,22 +183,29 @@ def call_method(identifier: str):
 
 def now():
     import datetime
+
     STACK.append(datetime.datetime.now())
 
 
 def utcnow():
     import datetime
+
     STACK.append(datetime.datetime.utcnow())
 
 
 def today():
     import datetime
+
     STACK.append(datetime.date.today())
 
 
 def str_help():
     string = STACK.pop()
-    op = UNARY_OPERATORS.get(string) or SPECIAL_OPERATORS.get(string) or UNARY_OPERATORS.get(string)
+    op = (
+        UNARY_OPERATORS.get(string)
+        or SPECIAL_OPERATORS.get(string)
+        or UNARY_OPERATORS.get(string)
+    )
     help(op)
 
 
@@ -212,10 +226,15 @@ def end_substack():
     STACKS.pop()
     STACK = STACKS[-1]
 
+
 def enter_substack():
     global STACK
     STACK = STACK[-1]
     STACKS.append(STACK)
+
+
+def exit_():
+    raise SystemExit
 
 
 SPECIAL_OPERATORS = {
@@ -233,6 +252,7 @@ SPECIAL_OPERATORS = {
     'dist': two_arg_factory(math.dist),
     'eng': set_eng_format,
     'es': enter_substack,
+    'exit': exit_,
     'gen': set_general_format,
     'h': display_help,
     'linreg': two_arg_factory(linear_regression),
@@ -252,25 +272,28 @@ for const in 'tau', 'pi', 'e', 'nan', 'inf':
     SPECIAL_OPERATORS[const] = load_constant_factory(const)
 
 
-N = ( # noqa
+N = (  # noqa
     r'(?>'
-        r'[\d۰-۹][\d۰-۹,_]*+(?:\.[\d۰-۹_]*+)?+'
-        r'|\.[\d۰-۹_]++'
-    r')(?:[Ee][+-]?+[\d۰-۹_]++)?+')
+    r'[\d۰-۹][\d۰-۹,_]*+(?:\.[\d۰-۹_]*+)?+'
+    r'|\.[\d۰-۹_]++'
+    r')(?:[Ee][+-]?+[\d۰-۹_]++)?+'
+)
 fullmatch = rc(  # noqa
     r'\s*+'
     r'(?:'
-        r'('  # each token is either a number or an operator
-            rf'[+-]?+{N}(?:[Jj]|[-+]{N}[Jj])?+'  # complex part
-            r'|"[^"]*"'
-            r'|\L<operators>'
-            r'|\.[^\d\W]\w*'
-        r')\s*+'
+    r'('  # each token is either a number or an operator
+    rf'[+-]?+{N}(?:[Jj]|[-+]{N}[Jj])?+'  # complex part
+    r'|"[^"]*"'
+    r'|\L<operators>'
+    r'|\.[^\d\W]\w*'
+    r')\s*+'
     r')*+',
     operators=(
         BINARY_OPERATORS.keys()
         | UNARY_OPERATORS.keys()
-        | SPECIAL_OPERATORS.keys())).fullmatch
+        | SPECIAL_OPERATORS.keys()
+    ),
+).fullmatch
 
 
 def operate(token):
@@ -331,7 +354,11 @@ def evaluate(i):
 def main():
     print(f'Kalk v{__version__}')
     while True:
-        last_result = evaluate(input('>>> '))
+        try:
+            last_result = evaluate(input('>>> '))
+        except KeyboardInterrupt:
+            print()
+            continue
         if isinstance(last_result, (int, float)):
             print(FORMAT(last_result))
         elif last_result is not None:

@@ -3,7 +3,7 @@ Kalk
 
 installation
 ------------
-Requires Python 3.9+.
+Requires the latest stable Python_ version.
 
 ``pip install kalk``
 
@@ -14,6 +14,7 @@ After installation run ``kalk`` from your terminal.
 In RPN_ syntax one would first enter the operands and then the operator:
 
 .. code-block:: python
+
 
     >>> 1
     1
@@ -97,6 +98,9 @@ Handy operators:
 * ``rcl`` recalls the value in storage using the last stack value as the key.
 * ``h`` prints a list of all operators. (still needs lots of refinements.)
 * ``?`` prints the docstring of the operator given as a string. For example ``"<>" ?`` will print the help string on swap. Note that not all functions have documentation yet.
+* ``ctrl+c`` (KeyboardInterrupt) will cancel the current input.
+* ``exit`` will quit the program.
+
 
 .. _RPN: https://en.wikipedia.org/wiki/Reverse_Polish_notation
 .. _power operator: https://docs.python.org/3/reference/expressions.html#the-power-operator
@@ -105,3 +109,4 @@ Handy operators:
 .. _statistics: https://docs.python.org/3/library/statistics.html
 .. _operator: https://docs.python.org/3/library/operator.html
 .. _Euler's number: https://en.wikipedia.org/wiki/E_(mathematical_constant)
+.. _Python: https://www.python.org/downloads/
