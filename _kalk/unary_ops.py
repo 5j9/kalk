@@ -56,9 +56,11 @@ def dt(value):
     """Convert value to datetime using datetime.datetime.fromisoformat."""
     if isinstance(value, str):
         import datetime
+
         return datetime.datetime.fromisoformat(value)
 
     import jdatetime
+
     if isinstance(value, jdatetime.datetime):
         return value.togregorian()
 
@@ -67,38 +69,45 @@ def dt(value):
 
 def weeks(val):
     import datetime
+
     return datetime.timedelta(weeks=val)
 
 
 def days(val):
     import datetime
+
     return datetime.timedelta(val)
 
 
 def hours(val):
     import datetime
+
     return datetime.timedelta(hours=val)
 
 
 def minutes(val):
     import datetime
+
     return datetime.timedelta(minutes=val)
 
 
 def seconds(val):
     import datetime
+
     return datetime.timedelta(seconds=val)
 
 
 def jdt(value):
     """Convert value to jdatetime.datetime."""
     import jdatetime
+
     if isinstance(value, str):
         # todo: use fromisostring when the following issue is resolved
         # https://github.com/slashmili/python-jalali/issues/134
         return jdatetime.datetime.strptime(value, '%Y-%m-%d')
 
     import datetime
+
     if isinstance(value, datetime.datetime):
         return jdatetime.datetime.fromgregorian(datetime=value)
 

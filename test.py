@@ -46,6 +46,7 @@ def test_invalid_op(mocked_print):
 
 def test_eulers_number():
     import math
+
     assert evaluate('e') is math.e
 
 
@@ -72,7 +73,7 @@ def test_swap():
 
 
 def test_float_without_leading_zero():
-    assert evaluate('.9') == .9
+    assert evaluate('.9') == 0.9
 
 
 def test_leading_positive_sign():
@@ -80,11 +81,11 @@ def test_leading_positive_sign():
 
 
 def test_complex():
-    assert evaluate('1+2j 0j -') == 1+2j
+    assert evaluate('1+2j 0j -') == 1 + 2j
 
 
 def test_capital_e():
-    assert evaluate('2E-2') == .02
+    assert evaluate('2E-2') == 0.02
 
 
 @patch('builtins.print')
@@ -136,6 +137,7 @@ def test_zero_division(mocked_print):
 
 def test_notations():
     import _kalk
+
     v = evaluate('1 3 /')
     assert _kalk.FORMAT(v) == '0.3333333333333333'
     v = evaluate('eng')
@@ -169,6 +171,7 @@ def test_strings():
 
 def test_datetime_timedelta():
     from datetime import timedelta
+
     assert evaluate('"2023-03-22" dt "2023-02-22" dt -') == timedelta(28)
     assert evaluate('28 days +') == timedelta(56)
     assert evaluate('"1402-01-02" jdt dt "2023-03-22" dt ==') is True
@@ -180,6 +183,7 @@ def test_jdatetime():
 
 def test_now():
     import datetime
+
     assert isinstance(evaluate('now'), datetime.datetime)
 
 
