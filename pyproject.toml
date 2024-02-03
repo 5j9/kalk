@@ -1,36 +1,39 @@
 [build-system]
-requires = ["setuptools>=66.1.0"]
+requires = ['setuptools>=66.1.0']
 
 [build-system.build-backend]
 requires = ['flit_core >=3.2,<4']
 build-backend = 'flit_core.buildapi'
 
 [project]
-name = "kalk"
-authors = [{name = "5j9", email = "5j9@users.noreply.github.com"}]
-license = {text = "GNU General Public License v3 (GPLv3)"}
-description = "a simple cli RPN calculator written in Python"
-keywords = ["calculator", "kalkulator", "cli", "RPN"]
+name = 'kalk'
+authors = [{name = '5j9', email = '5j9@users.noreply.github.com'}]
+license = {text = 'GNU General Public License v3 (GPLv3)'}
+description = 'a simple cli RPN calculator written in Python'
+keywords = ['calculator', 'kalkulator', 'cli', 'RPN']
 classifiers = [
-    "Intended Audience :: End Users/Desktop",
-    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
-    "Programming Language :: Python :: 3.9",
-    "Topic :: Scientific/Engineering",
+    'Intended Audience :: End Users/Desktop',
+    'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
+    'Programming Language :: Python :: 3.9',
+    'Topic :: Scientific/Engineering',
 ]
-urls = {Homepage = "https://github.com/5j9/kalk"}
-requires-python = ">=3.9"
-dependencies = ["regex", "pyperclip"]
-dynamic = ["version"]
+urls = {Homepage = 'https://github.com/5j9/kalk'}
+requires-python = '>=3.9'
+dependencies = ['regex', 'pyperclip']
+dynamic = ['version']
 
 [project.readme]
-file = "README.rst"
-content-type = "text/x-rst"
+file = 'README.rst'
+content-type = 'text/x-rst'
 
 [project.optional-dependencies]
-tests = ["pytest"]
+tests = ['pytest']
 
 [project.scripts]
-kalk = "_kalk:main"
+kalk = '_kalk:main'
+
+[tool.flit.module]
+name = '_kalk'  # the import name
 
 [tool.ruff]
 line-length = 79
