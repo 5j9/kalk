@@ -54,10 +54,10 @@ from statistics import (
 
 def dt(value):
     """Convert value to datetime using datetime.datetime.fromisoformat."""
-    if isinstance(value, str):
+    if isinstance(value, str | int):
         import datetime
 
-        return datetime.datetime.fromisoformat(value)
+        return datetime.datetime.fromisoformat(f'{value}')
 
     import jdatetime
 
@@ -101,10 +101,8 @@ def jdt(value):
     """Convert value to jdatetime.datetime."""
     import jdatetime
 
-    if isinstance(value, str):
-        # todo: use fromisostring when the following issue is resolved
-        # https://github.com/slashmili/python-jalali/issues/134
-        return jdatetime.datetime.strptime(value, '%Y-%m-%d')
+    if isinstance(value, (str, int)):
+        return jdatetime.datetime.fromisoformat(f'{value}')
 
     import datetime
 
