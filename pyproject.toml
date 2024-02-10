@@ -32,6 +32,9 @@ kalk = '_kalk:main'
 [tool.flit.module]
 name = '_kalk'  # the import name
 
+[tool.flit.sdist]
+exclude = ['tests']
+
 [tool.ruff]
 line-length = 79
 format.quote-style = 'single'
