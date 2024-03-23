@@ -272,13 +272,13 @@ for const in 'tau', 'pi', 'e', 'nan', 'inf':
     SPECIAL_OPERATORS[const] = load_constant_factory(const)
 
 
-N = (  # noqa
+N = (
     r'(?>'
-    r'[\d۰-۹][\d۰-۹,_]*+(?:\.[\d۰-۹_]*+)?+'
-    r'|\.[\d۰-۹_]++'
-    r')(?:[Ee][+-]?+[\d۰-۹_]++)?+'
+    r'[\d][\d,_]*+(?:\.[\d_]*+)?+'
+    r'|\.[\d_]++'
+    r')(?:[Ee][+-]?+[\d_]++)?+'
 )
-fullmatch = rc(  # noqa
+fullmatch = rc(
     r'\s*+'
     r'(?:'
     r'('  # each token is either a number or an operator
