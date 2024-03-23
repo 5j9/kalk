@@ -1,4 +1,4 @@
-__version__ = '0.16.2.dev0'
+__version__ = '0.17.0'
 
 import math
 from math import floor, log10
