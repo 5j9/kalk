@@ -316,6 +316,7 @@ def operate(token):
 
 def evaluate(i):
     m = fullmatch(i)
+
     if m is None:
         print('SyntaxError')
         return None
@@ -353,12 +354,14 @@ def evaluate(i):
 
 def main():
     print(f'Kalk v{__version__}')
+
     while True:
         try:
             last_result = evaluate(input('>>> '))
         except KeyboardInterrupt:
             print()
             continue
+
         if isinstance(last_result, (int, float)):
             print(FORMAT(last_result))
         elif last_result is not None:

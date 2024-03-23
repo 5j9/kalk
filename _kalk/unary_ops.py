@@ -50,6 +50,7 @@ from statistics import (
     stdev,
     variance,
 )
+from subprocess import run
 
 
 def dt(value):
@@ -112,6 +113,10 @@ def jdt(value):
     raise ValueError('unknown format for jdt')
 
 
+def bash(command):
+    run(('bash', '-c', command))
+
+
 UNARY_OPERATORS = {
     '!': factorial,
     'abs': abs,
@@ -122,6 +127,7 @@ UNARY_OPERATORS = {
     'atan': atan,
     'atan2': atan2,
     'atanh': atanh,
+    'bash': bash,
     'bin': bin,
     'bool': bool,
     'ceil': ceil,
