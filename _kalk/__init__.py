@@ -1,4 +1,4 @@
-__version__ = '0.18.0'
+__version__ = '0.18.1.dev0'
 import math
 from math import floor, log10
 from pprint import pprint
