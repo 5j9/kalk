@@ -5,7 +5,8 @@ from pprint import pprint
 from statistics import correlation, covariance, linear_regression
 
 try:
-    import readline  # required for activating hist navigation on windows
+    # required for activating hist navigation on windows
+    import readline  # noqa: F401
 except ImportError:
     pass
 
