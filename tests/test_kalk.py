@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from _kalk import STACK, evaluate
+from _kalk import evaluate, stack
 
 
 def test_add():
@@ -12,9 +12,9 @@ def test_negative():
 
 
 def test_empty():
-    del STACK[:]
+    del stack[:]
     assert evaluate('') is None
-    STACK.append(1)
+    stack.append(1)
     assert evaluate('') == 1
 
 
@@ -69,7 +69,7 @@ def test_thousand_separator():
 
 def test_swap():
     evaluate('c 1 2 <>')
-    assert STACK == [2, 1]
+    assert stack == [2, 1]
 
 
 def test_float_without_leading_zero():
@@ -97,7 +97,7 @@ def test_syntax_error(mocked_print):
 @patch('builtins.print')
 def test_preserve_stack_on_binary_fail(mocked_print):
     evaluate('c 1 *')
-    assert STACK == [1]
+    assert stack == [1]
     mocked_print.assert_called_once_with('Error: not enough arguments')
 
 
@@ -115,7 +115,7 @@ def test_copy_paste(copy_mock):
 
 def test_pop():
     assert evaluate('c 7 8 1 del') == 7
-    assert STACK == [7]
+    assert stack == [7]
 
 
 def test_answer():
@@ -197,4 +197,4 @@ def test_gmean():
 
 def test_substacks():
     evaluate('c 1 2 [3 4] es 5 ] 6')
-    assert STACK == [1, 2, [3, 4, 5], 6]
+    assert stack == [1, 2, [3, 4, 5], 6]

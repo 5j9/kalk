@@ -10,8 +10,8 @@ from regex import compile as rc
 from _kalk.binary_ops import BINARY_OPERATORS
 from _kalk.unary_ops import UNARY_OPERATORS
 
-STACK = []
-STACKS = [STACK]
+stack = []
+STACKS = [stack]
 
 
 STORAGE = {}
@@ -19,9 +19,9 @@ STORAGE = {}
 
 def two_arg_factory(func):
     def f():
-        d = func(STACK[-1], STACK[-2])
-        del STACK[-1]
-        STACK[-1] = d
+        d = func(stack[-1], stack[-2])
+        del stack[-1]
+        stack[-1] = d
 
     f.__doc__ = func.__doc__
     f.__name__ = func.__name__
@@ -29,7 +29,7 @@ def two_arg_factory(func):
 
 
 def print_stack():
-    for i, n in enumerate(STACK):
+    for i, n in enumerate(stack):
         print(f'{i}: {n}')
 
 
@@ -43,19 +43,19 @@ def load_constant_factory(name):
     val = getattr(math, name)
 
     def load_constant():
-        STACK.append(val)
+        stack.append(val)
 
     load_constant.__doc__ = f"""Load {name} = {val} into the stack."""
     return load_constant
 
 
 def ans():
-    STACK.append(STACK[-1])
+    stack.append(stack[-1])
 
 
 def swap():
     """Swap the place of last two results on the stack"""
-    STACK[-2:] = reversed(STACK[-2:])
+    stack[-2:] = reversed(stack[-2:])
 
 
 def paste_from_clipboard():
@@ -67,30 +67,30 @@ def paste_from_clipboard():
 def copy_to_clipboard():
     from pyperclip import copy
 
-    copy(f'{STACK[-1]}')
+    copy(f'{stack[-1]}')
 
 
 def delete():
-    del STACK[-STACK[-1] - 1 :]
+    del stack[-stack[-1] - 1 :]
 
 
 def store():
-    k = STACK.pop()
-    STORAGE[k] = STACK.pop()
+    k = stack.pop()
+    STORAGE[k] = stack.pop()
 
 
 def recall():
-    STACK.append(STORAGE[STACK.pop()])
+    stack.append(STORAGE[stack.pop()])
 
 
-PRECISION = 5
+_precision = 5
 
 
 def precision():
-    global PRECISION
-    PRECISION = STACK.pop()
+    global _precision
+    _precision = stack.pop()
     try:
-        return STACK[-1]
+        return stack[-1]
     except IndexError:
         return None
 
@@ -154,7 +154,7 @@ def set_eng_format():
         else:
             exp3_text = f'e{exp3}'
 
-        return f'{sign}{x3:.{max(PRECISION, 3)}g}{exp3_text}'
+        return f'{sign}{x3:.{max(_precision, 3)}g}{exp3_text}'
 
     fmt = eng_string
 
@@ -163,7 +163,7 @@ def set_sci_format():
     global fmt
 
     def sci_string(n):
-        return f'{n:.{PRECISION}e}'
+        return f'{n:.{_precision}e}'
 
     fmt = sci_string
 
@@ -172,35 +172,35 @@ def set_general_format():
     global fmt
 
     def sci_string(n):
-        return f'{n:.{PRECISION}g}'
+        return f'{n:.{_precision}g}'
 
     fmt = sci_string
 
 
 def call_method(identifier: str):
-    STACK.append(getattr(STACK.pop(), identifier)())
+    stack.append(getattr(stack.pop(), identifier)())
 
 
 def now():
     import datetime
 
-    STACK.append(datetime.datetime.now())
+    stack.append(datetime.datetime.now())
 
 
 def utcnow():
     import datetime
 
-    STACK.append(datetime.datetime.utcnow())
+    stack.append(datetime.datetime.utcnow())
 
 
 def today():
     import datetime
 
-    STACK.append(datetime.date.today())
+    stack.append(datetime.date.today())
 
 
 def str_help():
-    string = STACK.pop()
+    string = stack.pop()
     op = (
         UNARY_OPERATORS.get(string)
         or SPECIAL_OPERATORS.get(string)
@@ -210,27 +210,27 @@ def str_help():
 
 
 def clear_stack():
-    del STACK[:]
+    del stack[:]
 
 
 def start_substack():
-    global STACK
+    global stack
     new_stack = []
-    STACK.append(new_stack)
-    STACK = new_stack
+    stack.append(new_stack)
+    stack = new_stack
     STACKS.append(new_stack)
 
 
 def end_substack():
-    global STACK
+    global stack
     STACKS.pop()
-    STACK = STACKS[-1]
+    stack = STACKS[-1]
 
 
 def enter_substack():
-    global STACK
-    STACK = STACK[-1]
-    STACKS.append(STACK)
+    global stack
+    stack = stack[-1]
+    STACKS.append(stack)
 
 
 def exit_():
@@ -298,14 +298,14 @@ fullmatch = rc(
 
 def operate(token):
     if (op := BINARY_OPERATORS.get(token)) is not None:
-        last = STACK.pop()
+        last = stack.pop()
         try:
-            STACK.append(op(STACK.pop(), last))
+            stack.append(op(stack.pop(), last))
         except IndexError:
-            STACK.append(last)
+            stack.append(last)
             raise
     elif (op := UNARY_OPERATORS.get(token)) is not None:
-        STACK.append(op(STACK.pop()))
+        stack.append(op(stack.pop()))
     elif (op := SPECIAL_OPERATORS.get(token)) is not None:
         op()
     elif token[0] == '.' and (identifier := token[1:]).isidentifier():
@@ -332,7 +332,7 @@ def evaluate(i):
             return
 
         if token[0] == '"':
-            STACK.append(eval(token))
+            stack.append(eval(token))
             continue
 
         token = token.replace(',', '').replace('_', '')
@@ -344,10 +344,10 @@ def evaluate(i):
         except ValueError:
             result = complex(token)
 
-        STACK.append(result)
+        stack.append(result)
 
     try:
-        return STACK[-1]
+        return stack[-1]
     except IndexError:
         return None
 
