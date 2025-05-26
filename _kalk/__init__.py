@@ -1,6 +1,7 @@
 __version__ = '0.17.1.dev0'
 
 import math
+import readline  # noqa: F401
 from math import floor, log10
 from pprint import pprint
 from statistics import correlation, covariance, linear_regression
