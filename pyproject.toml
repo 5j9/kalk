@@ -19,6 +19,7 @@ requires-python = '>=3.9'
 dependencies = [
     'regex',
     'pyperclip',
+    "jdatetime>=5.2.0",
 ]
 dynamic = ['version']
 
