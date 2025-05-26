@@ -139,24 +139,24 @@ def test_notations():
     import _kalk
 
     v = evaluate('1 3 /')
-    assert _kalk.FORMAT(v) == '0.3333333333333333'
+    assert _kalk.fmt(v) == '0.3333333333333333'
     v = evaluate('eng')
-    assert _kalk.FORMAT(v) == '333.33e-3'  # default precision is 5
+    assert _kalk.fmt(v) == '333.33e-3'  # default precision is 5
     v = evaluate('sci')
-    assert _kalk.FORMAT(v) == '3.33333e-01'
+    assert _kalk.fmt(v) == '3.33333e-01'
     v = evaluate('gen')
-    assert _kalk.FORMAT(v) == '0.33333'
+    assert _kalk.fmt(v) == '0.33333'
     v = evaluate('nrm')
-    assert _kalk.FORMAT(v) == '0.3333333333333333'
+    assert _kalk.fmt(v) == '0.3333333333333333'
     v = evaluate('2 prec')
-    assert _kalk.FORMAT(v) == '0.3333333333333333'
+    assert _kalk.fmt(v) == '0.3333333333333333'
     v = evaluate('eng')
-    assert _kalk.FORMAT(v) == '333e-3'
-    assert _kalk.FORMAT(0) == '0'
+    assert _kalk.fmt(v) == '333e-3'
+    assert _kalk.fmt(0) == '0'
     v = evaluate('sci')
-    assert _kalk.FORMAT(v) == '3.33e-01'
+    assert _kalk.fmt(v) == '3.33e-01'
     v = evaluate('gen')
-    assert _kalk.FORMAT(v) == '0.33'
+    assert _kalk.fmt(v) == '0.33'
 
 
 def test_as_integer_ratio_method():

@@ -96,24 +96,24 @@ def precision():
         return None
 
 
-FORMAT = '{:,}'.format
+fmt = '{:,}'.format
 
 
 def set_normal_format():
-    global FORMAT
-    FORMAT = '{:,}'.format
+    global fmt
+    fmt = '{:,}'.format
 
 
-SI = 0
+si = 0
 
 
 def toggle_si_format():
-    global SI
-    SI = not SI
+    global si
+    si = not si
 
 
 def set_eng_format():
-    global FORMAT
+    global fmt
 
     # from https://stackoverflow.com/a/19270863/2705757 with some modifications
     def eng_string(x):
@@ -148,7 +148,7 @@ def set_eng_format():
         exp3 = exp - (exp % 3)
         x3 = x / (10**exp3)
 
-        if SI is True and -24 <= exp3 <= 24 and exp3 != 0:
+        if si is True and -24 <= exp3 <= 24 and exp3 != 0:
             exp3_text = 'yzafpnum kMGTPEZY'[(exp3 + 24) // 3]
         elif exp3 == 0:
             exp3_text = ''
@@ -157,25 +157,25 @@ def set_eng_format():
 
         return f'{sign}{x3:.{max(PRECISION, 3)}g}{exp3_text}'
 
-    FORMAT = eng_string
+    fmt = eng_string
 
 
 def set_sci_format():
-    global FORMAT
+    global fmt
 
     def sci_string(n):
         return f'{n:.{PRECISION}e}'
 
-    FORMAT = sci_string
+    fmt = sci_string
 
 
 def set_general_format():
-    global FORMAT
+    global fmt
 
     def sci_string(n):
         return f'{n:.{PRECISION}g}'
 
-    FORMAT = sci_string
+    fmt = sci_string
 
 
 def call_method(identifier: str):
@@ -364,7 +364,7 @@ def main():
             continue
 
         if isinstance(last_result, (int, float)):
-            print(FORMAT(last_result))
+            print(fmt(last_result))
         elif last_result is not None:
             print(last_result)
 
