@@ -1,5 +1,6 @@
 __version__ = '0.18.1.dev0'
 import math
+from datetime import UTC
 from math import floor, log10
 from pprint import pprint
 from statistics import correlation, covariance, linear_regression
@@ -195,7 +196,7 @@ def now():
 def utcnow():
     import datetime
 
-    stack.append(datetime.datetime.utcnow())
+    stack.append(datetime.datetime.now(UTC).replace(tzinfo=None))
 
 
 def today():
