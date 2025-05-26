@@ -26,8 +26,10 @@ dynamic = ['version']
 file = 'README.rst'
 content-type = 'text/x-rst'
 
-[project.optional-dependencies]
-tests = ['pytest']
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+]
 
 [project.scripts]
 kalk = '_kalk:main'
