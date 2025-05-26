@@ -144,7 +144,7 @@ def set_eng_format():
         else:
             return '0'
 
-        exp = int(floor(log10(x)))
+        exp = floor(log10(x))
         exp3 = exp - (exp % 3)
         x3 = x / (10**exp3)
 
