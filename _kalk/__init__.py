@@ -1,9 +1,13 @@
 __version__ = '0.17.1.dev0'
-
 import math
 from math import floor, log10
 from pprint import pprint
 from statistics import correlation, covariance, linear_regression
+
+try:
+    import readline  # required for activating hist navigation on windows
+except ImportError:
+    pass
 
 from regex import compile as rc
 
