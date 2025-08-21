@@ -22,7 +22,7 @@ dependencies = [
     "jdatetime>=5.2.0",
     "pyreadline3>=3.5.4 ; sys_platform == 'win32'",
 ]
-version = "0.18.1.dev0"
+version = "0.19.0"
 
 [project.readme]
 file = 'README.rst'
