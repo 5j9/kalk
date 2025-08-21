@@ -198,3 +198,7 @@ def test_gmean():
 def test_substacks():
     evaluate('c 1 2 [3 4] es 5 ] 6')
     assert stack == [1, 2, [3, 4, 5], 6]
+
+
+def test_randbelow():
+    assert 0 <= evaluate('10 randbelow') < 10  # type: ignore

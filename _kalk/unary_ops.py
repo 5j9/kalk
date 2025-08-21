@@ -50,7 +50,6 @@ from statistics import (
     stdev,
     variance,
 )
-from subprocess import run
 
 
 def dt(value):
@@ -114,7 +113,15 @@ def jdt(value):
 
 
 def bash(command):
+    from subprocess import run
+
     run(('bash', '-c', command))
+
+
+def randbelow(val):
+    from secrets import randbelow
+
+    return randbelow(val)
 
 
 UNARY_OPERATORS = {
@@ -173,6 +180,7 @@ UNARY_OPERATORS = {
     'pstdev': pstdev,
     'pvar': pvariance,
     'rad': radians,
+    'randbelow': randbelow,
     'round': round,
     'seconds': seconds,
     'sin': sin,
